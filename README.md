@@ -1,0 +1,1 @@
+# Not Everyone Ages Gracefully: Fiscal Adjustments to Exogenous Shocks in Three Latin American Countries
