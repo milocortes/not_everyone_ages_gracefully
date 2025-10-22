@@ -73,6 +73,7 @@ Se muestra también las salidas del modelo que son definidas como targets de cal
 | $tau_t^w$ | Tasa de impuesto al ingreso laboral. | X | X | | Se consultó OECD Tax Database |
 | $tau_t^r$ | Tasa de impuesto al ingreso de capital. |  | X | | Se consultó OECD Tax Database |
 | $tau_t^p$ | Tasa de contribución sobre nómina al sistema de pensiones. |  | X | | Se consultó OECD-Founded Pension Indicators-Contributions |
+| $tau_(j, t)^(i m p l)$ | Tasa de impuestos implícita de la contribución sobre nómina al sistema de pensiones. |  | X | | Se consultó OECD-Founded Pension Indicators-Contributions |
 | PEN/GDP | Pago a pensiones como porcentaje del PIB. |  | X | | Se consultó OECD-Pensions at Glance-Public expenditure on pensions |
 | C/GDP. | Consumo privado como porcentaje del PIB. |  | X | | Se consultó PWT 10.01, Penn World Table |
 | I/GDP | Inversión como porcentaje del PIB. |  | X | | Se consultó PWT 10.01, Penn World Table |

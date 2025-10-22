@@ -75,7 +75,7 @@ $$
 E\left[\sum_{j=1}^J \beta^{j-1}\left(\Pi_{i=2}^j \psi_{i, s} m_{i-1,s}\right) u\left(c_{j, s}, 1-l_{j, s}\right)\right]
 $$
 
-donde $\beta$ denota el factor de descuento de tiempo.
+donde $\beta$ denota el factor de descuento de tiempo. Como puede verse, en la utilidad marginal esperada del consumo futuro es también condicional al actual estado laboral $m$.
 
 La función de utilidad de los hogares está dada por
 
@@ -123,20 +123,8 @@ $$
 Dada esta estructura, la productividad laboral del hogar es
 
 $$
-h_j= \begin{cases}e_j \exp \left[\theta+\eta_j\right] & \text { si } j<j_r \\ 0 & \text { si } j \geq j_r\end{cases}
+h_j= \begin{cases}e_j \exp \left[\eta_j\right] & \text { si } j<j_r \\ 0 & \text { si } j \geq j_r\end{cases}
 $$
-`)
-
-=== Ingresos y egresos de los hogares por el sistema de pensiones
-#mitext(`
-A la edad obligatoria de retiro $j_r$, la productividad laboral cae a cero y los hogares reciben una pensión $p e n_{j, t}$ igual a la fracción $\kappa$ (tasa de reemplazo del sistema de pensiones, definida de forma exógena) del ingreso laboral promedio en el periodo $t$.
-
-$$
-\text { pen }_j= \begin{cases}0 & \text { si } j<j_r \\ \kappa_t \frac{w_t}{j_r-1} \sum_{j=1}^{j_r-1} e_j, & \text { si } j \geq j_r\end{cases}
-$$
-
-
-Durante su edad laboral $\left(j<j_r\right)$, los hogares pagan una la contribución al sistema de pensiones $\tau_t^p$ con respecto a su salario.
 `)
 
 === Problema de Decisión de los Consumidores
@@ -145,8 +133,8 @@ Los hogares maximizan la función de utilidad sujeta a la restricción presupues
 #mitext(`
 \begin{equation}
 a_{j+1, s, t}=\left\{\begin{array}{l}
-\left(1+r_t^n\right) a_{j, s, t-1}+w_t^n h_{j, s, t} l_{j, s, t}+b_{j, s, t}+p e n_{j, s, t}-p_t c_{j, s, t} \quad \text { si }  s=1 \\
-\left(1+r_t^n\right) a_{j, s, t-1}+w_t h_{j, s, t} l_{j, s, t}+b_{j, s, t}-p_t c_{j, s, t} \text{ si } s=2
+\left(1+r_t^n\right) a_{j, s, t-1}+w_t^n h_{j, s, t} l_{j, s, t}+b_{j, s, t}+p e n_{j, s, t}-p_t c_{j, s, t} \quad \text { si }  s=0 \\
+\left(1+r_t^n\right) a_{j, s, t-1}+w_t h_{j, s, t} l_{j, s, t}+b_{j, s, t}-p_t c_{j, s, t} \text{ si } s=1
 \end{array}\right.
 \end{equation}
 `)
@@ -154,7 +142,7 @@ a_{j+1, s, t}=\left\{\begin{array}{l}
 donde:
 
 - #mitext(`$a_{j, t}$ son los ahorros-activos del agente en el periodo t ,`)
-- #mitext(`$w_t^n=w_t\left(1-\tau_t^w-\tau_t^p\right)$ es la tasa de salario neto, la cual es igual al salario de mercado $w_t$ menos los impuestos por ingreso laboral $\tau_t^w$ y el impuesto de nómina para financiar el sistema de pensión $\tau_t^p$`)
+- #mitext(`$w_t^n=w_t\left(1-\tau_t^w-\tau_{j, t}^{i m p l} \right)$ es la tasa de salario neto, la cual es igual al salario de mercado $w_t$ menos los impuestos por ingreso laboral $\tau_{j, t}^{i m p l}$ y el impuesto de nómina para financiar el sistema de pensión $\tau_t^p$`)
 - #mitext(`$r_t^n=r_t\left(1-\tau_t^r\right)$ es la tasa de interés neta, que es igual a la tasa de interés de mercado $r_t$ descontando el impuesto por ingresos de capital $\tau_t^r$,`)
 - #mitext(`$p_t=1+\tau_t^c$ es el precio al consumidor el cual se normaliza a uno y se agregan los impuestos al consumo $\tau_t^c$.`)
 
@@ -166,13 +154,7 @@ Se agrega una restricción adicional de no negatividad de los ahorros #mitext(`$
 El problema de optimización de los agentes es el siguiente:
 
 #mitext(`
-$$
-\begin{aligned}
-V_t(z)=\max _{c, l, a^{+}} & u(c, 1-l)+\beta E\left[V_{t+1}\left(z^{+}\right) \mid \eta\right] \\
-\text { s.a. } & a^{+}+p_t c=\left(1+r_t^n\right) a+w_t^n h l+\text { pen }, \quad a^{+} \geq 0, \quad l \geq 0 \\
-& \mathrm{y} \quad \eta^{+}=\rho \eta+\epsilon^{+} \quad \text { con } \quad \epsilon^{+} \sim N\left(0 . \sigma_\epsilon^2\right),
-\end{aligned}
-$$
+
 
 \begin{equation}
 \begin{aligned}
@@ -198,21 +180,14 @@ Formulamos la solución de problema de los hogares al reconocer que podemos escr
 
 $$
 \begin{aligned}
-l=l\left(a^{+}\right) & =\min \left\{\max \left[\nu+\frac{1-\nu}{w_t^n h}\left(a^{+}-\left(1+r_t^n\right) a-\text { pen }\right), 0\right], 1\right\} \\
-c & =c\left(a^{+}\right)=\frac{1}{p_t}\left[\left(1+r_t^n\right) a+w_t^n h l\left(a^{+}\right)+\text {pen }-a^{+}\right]
+l=l\left(a^{+}\right) & =\min \left\{\max \left[\nu+\frac{1-\nu}{(w_t^n * (1-m) + w_t *m) h}\left(a^{+}-\left(1+r_t^n\right) a -  \text { pen }*( 1-m) \right), 0\right], 1\right\} \\
+c & =c\left(a^{+}\right)=\frac{1}{p_t}\left[\left(1+r_t^n\right) a+(w_t^n * (1-m) + w_t *m)  h l\left(a^{+}\right)+\text {pen }*(1-m)-a^{+}\right]
 \end{aligned}
 $$
 
 
-El problema de los hogares se reduce a resolver la condición de primer orden
 
-$$
-\frac{\nu\left[c\left(a^{+}\right)^\nu\left(1-l\left(a^{+}\right)\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{p_t c\left(a^{+}\right)}=\beta\left(1+r_{t+1}^n\right) \times E\left[\left.\frac{\nu\left[c_{t+1}\left(z^{+}\right)^\nu\left(1-l_{t+1}\left(z^{+}\right)\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{p_{t+1} c_{t+1}\left(z^{+}\right)} \right\rvert\, \eta\right]
-$$
-
-
-
-Con la definición de la \textbf{implicit tax rate}, las condiciones de primer orden de los hogares se definen como
+Con la definición de la \textbf{implicit tax rate} (Ver siguiente sección), las condiciones de primer orden de los hogares se definen como
 
 \begin{equation}
 \begin{aligned}
@@ -223,6 +198,163 @@ Con la definición de la \textbf{implicit tax rate}, las condiciones de primer o
 
 donde $a^{+}$es desconocido. Nótese que $\tau_{j, t}^{i m p l} = \tau_{t}^p$ para $\lambda = 1$, lo que se reduce al modelo original.
 `)
+
+=== Ingresos y egresos de los hogares por el sistema de pensiones
+A la edad obligatoria de retiro $j_r$, la productividad laboral cae a cero y 
+los hogares reciben una pensión $p e n_(j,t)$ , la cual está en función del historial salarial del individuo. Con el objetivo de hacer un seguimiento y contabilizar los salarios pasados así como las contribuciones a pensiones, se agrega un estado *earning points*, $e p$, el cual captura los ingresos brutos individuales relativos al ingreso promedio de la economía completa para cada año de contribución#footnote[Este mecanismo de seguimiento de ingresos es tomado de @fehr2013should, el cual es como funciona el sistema de pensiones alemán.] @fehr2013should
+
+
+#mitext(`
+\begin{equation}
+e p_{j+1}=\left[e p_j \times(j-1)+\left(\lambda+(1-\lambda) \frac{w h l_j}{\bar{y}}\right)\right] / j
+\end{equation}
+`)
+
+donde el parámetro $lambda$ indica el nivel de *progresividad* del sistema de pensiones @fehr2018introduction. Cuando $lambda = 1$ la pensión es independiente de las contribuciones previas y es igual a la fracción de la tasa de reemplazo $kappa$ del sistema de pensiones del ingreso laboral promedio en el periodo $t$, esto es:
+
+
+#mitext(`
+$$
+\text { pen }_j= \begin{cases}0 & \text { si } j<j_r \\ \kappa_t \frac{w_t}{j_r-1} \sum_{j=1}^{j_r-1} e_j, & \text { si } j \geq j_r\end{cases}
+$$
+`)
+
+Cuando $lambda = 0$, la pensión depende enteramente del historial salarial. Durante la fase de retiro de la trabajadora $j gt.eq j_r $, los puntos salariales quedan constantes y la pensión se calcula como 
+
+#mitext(`
+\begin{equation}
+\operatorname{pen}_j=\kappa_t \times e p_{j_r} \times \bar{y}
+\end{equation}
+`)
+
+Los earning points evolucionan de acuerdo a la ecuación:
+
+#mitext(`
+\begin{equation}
+e p^{+}= \begin{cases}\frac{j-1}{j} \cdot e p+\frac{1}{j} \cdot\left[\lambda+(1-\lambda) \cdot \frac{w_t h l}{y_t}\right] & \text { si } j<j_r,  \\ e p & \text { en caso contrario. }\end{cases}
+\end{equation}
+`)
+
+Esta ecuación integre dos partes:
+- La fase de acumulación, $j lt.small j_r $
+- La fase de rendimientos, $j gt.eq j_r $
+
+La restricción presupuestaria de los hogares cambia a :
+
+#mitext(`
+\begin{equation}
+a^{+}+p_t c=\left(1+r_t^n\right) a+w_t^n h l+\mathbb{1}_{j \geq j_r} \kappa_t \bar{y}_t e p
+\end{equation}
+`)
+
+El beneficio de la pensión se obtiene hasta que se alcanza la edad de retiro $j_r$ y es igual al producto de la tasa de reemplazo actual $kappa_t$, el ingreso promedio $overline(y)$ así como también los puntos de ingreso acumulado por la trabajadora $e p$.
+
+El Lagrangeano del problema de optimización del hogar se escribe : 
+
+#mitext(`
+\begin{equation}
+\begin{aligned}
+\mathcal{L}= & \frac{\left[c^v(1-l)^{1-v}\right]^{1-\frac{1}{\gamma}}}{1-\frac{1}{\gamma}}+\beta E\left[V\left(z^{+}\right) \mid \eta\right]+ \\
+& +\mu_1\left[\left(1+r_t^n\right) a+w_t^n h l+\mathbb{1}_{j \geq j_r} \kappa_t \bar{y}_t e p-a^{+}-p_t c\right] \\
+& +\mu_2 \mathbb{1}_{j<j_r}\left[\frac{j-1}{j} \cdot e p+\frac{1}{j} \cdot\left[\lambda+(1-\lambda) \cdot \frac{w_t h l}{\bar{y}_t}\right]-e p^{+}\right] \\
+& +\mu_2 \mathbb{1}_{j \geq j_r}\left[e p-e p^{+}\right]
+\end{aligned}
+\end{equation}
+`)
+
+con las siguientes condiciones de primer orden:
+
+#mitext(`
+\begin{equation}
+\begin{aligned}
+& \frac{\nu}{p_t} \cdot \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c}=\beta E\left[V_{a^{+}}\left(z^{+}\right) \mid \eta\right] \\
+& \frac{1-\nu}{\nu} \cdot p_t c=w_t h(1-l)\left\{1-\tau_t^w-\tau_t^p+\frac{1-\lambda}{j \cdot \bar{y}} \cdot \frac{\beta E\left[V_{e p^{+}}\left(z^{+}\right) \mid \eta\right]}{\frac{\nu}{p_t} \cdot \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c}}\right\}
+\end{aligned}
+\end{equation}
+`)
+
+Cuando $lambda = 1$, la parte de la ecuación
+
+#mitext(`
+\begin{equation}
+\frac{1-\lambda}{j \cdot \bar{y}} \cdot \frac{\beta E\left[V_{e p^{+}}\left(z^{+}\right) \mid \eta\right]}{\frac{\nu}{p_t} \cdot \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c}}
+\end{equation}
+`)
+
+Se hace cero, y nos enfrentamos al caso base de una pensión flat, independiente de las contribuciones previas.
+
+Del teorema del envolvente se obtiene:
+
+#mitext(`
+\begin{equation}
+\begin{aligned}
+V_{a^{+}}\left(z^{+}\right)= & \left(1+r_{t+1}^n\right) \cdot \frac{v}{p_{t+1}} \cdot \frac{\left[\left(c^{+}\right)^\nu\left(1-l^{+}\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c^{+}} \\
+V_{e p^{+}}\left(z^{+}\right)= & \mathbb{1}_{j+1 \geq j_r} \cdot \kappa_{t+1} \bar{y}_{t+1} \cdot \frac{\nu}{p_{t+1}} \cdot \frac{\left[\left(c^{+}\right)^\nu\left(1-l^{+}\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c^{+}} \\
+& +\left[\mathbb{1}_{j+1<j_r} \cdot \frac{j}{j+1}+\mathbb{1}_{j+1 \geq j_r}\right] \cdot \beta E\left[V_{e p^{++}}\left(z^{++}\right) \mid \eta\right] .
+\end{aligned}
+\end{equation}
+`)
+
+Iterando la condición de primer orden hacia adelante, obtenemos:
+
+#mitext(`
+\begin{equation}
+\beta^{i-j} E\left[\left.\frac{v}{p_{t+i-j}} \cdot \frac{\left[\left(c_i\right)^v\left(1-l_i\right)^{1-v}\right]^{1-\frac{1}{\gamma}}}{c_i} \right\rvert\, \eta_j\right]=\frac{\frac{v}{p_t} \cdot \frac{\left[\left(c_j\right)^v\left(1-l_j\right)^{1-v}\right]^{1-\frac{1}{\gamma}}}{c_j}}{\prod_{k=j+1}^i\left(1+r_{t+k-j}\right)}(I)
+\end{equation}
+`)
+
+para $i lt.small j$.
+
+Para la edad $j+1 = j_r$, la segunda ecuación del envolvente se reduce a
+
+#mitext(`
+\begin{equation}
+V_{e p}\left(z_{j_r}\right)=\kappa_{t+1} \bar{y}_{t+1} \cdot \frac{v}{p_{t+1}} \cdot \frac{\left[\left(c_{j_r}\right)^\nu\left(1-l_{j_r}\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c_{j_r}}+\beta E\left[V_{e p}\left(z_{j_r+1}\right) \mid \eta_j\right] (II)
+\end{equation}
+`)
+
+con $s = t +1 +i -j_r$. Para cualquier $j+1 lt.small j_r$, tenemos
+
+#mitext(`
+\begin{equation}
+\begin{aligned}
+V_{e p}\left(z_{j+1}\right) & =\frac{j}{j+1} \cdot \beta E\left[V_{e p}\left(z_{j+2}\right) \mid \eta_j\right] \\
+& =\frac{j}{j+1} \cdot \beta E\left[\left.\frac{j+1}{j+2} \cdot \beta E\left[V_{e p}\left(z_{j+3}\right) \mid \eta_j\right] \right\rvert\, \eta_j\right] \\
+& =\frac{j}{j+2} \cdot \beta^2 E\left[V_{e p}\left(z_{j+3}\right) \mid \eta_j\right]=\ldots \\
+& =\frac{j}{j_r-1} \cdot \beta^{j_r-(j+1)} E\left[V_{e p}\left(z_{j_r}\right) \mid \eta_j\right]
+\end{aligned}
+\end{equation}
+`)
+
+Sustituyendo $(II)$ tenemos 
+
+#mitext(`
+\begin{equation}
+\beta E\left[V_{e p^{+}}\left(z^{+}\right) \mid \eta_j\right]=\frac{j}{j_r-1} \sum_{i=j_r}^J \kappa_s \bar{y}_s \cdot \beta^{i-j} E\left[\left.\frac{v}{p_s} \cdot \frac{\left[\left(c_i\right)^v\left(1-l_i\right)^{1-v}\right]^{1-\frac{1}{\gamma}}}{c_i} \right\rvert\, \eta_j\right],
+\end{equation}
+`)
+
+con $s = t+i-j$. Sustituyendo ahora la ecuación $(I)$, tenemos:
+
+
+#mitext(`
+\begin{equation}
+\frac{1-\lambda}{j \cdot \bar{y}_t} \cdot \frac{\beta E\left[V_{e p^{+}}\left(z^{+}\right) \mid \eta\right]}{\frac{\nu}{p_t} \cdot \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c}}=\frac{1-\lambda}{\left(j_r-1\right) \cdot \bar{y}_t} \cdot \sum_{i=j_r}^J \frac{\kappa_s \bar{y}_s}{\prod_{k=j+1}^i\left(1+r_{t+k-j}\right)}
+\end{equation}
+`)
+
+con $s = t+i-j$. 
+
+
+En consecuencia, definimos la *tasa de impuesto implícita* del sistema de pensiones como
+
+#mitext(`
+\begin{equation}
+\tau_{j, t}^{i m p l}=\tau_t^p-\frac{1-\lambda}{\left(j_r-1\right) \cdot \bar{y}_t} \cdot \sum_{i=j_r}^J \frac{\kappa_s \bar{y}_s}{\prod_{k=j+1}^i\left(1+r_{t+k-j}\right)}
+\end{equation}
+`)
+
+Esta tasa de impuesto implícita toma en cuenta que, si $lambda lt.small 1$, los pagos a pensiones se incrementan al incrementarse los ingresos laborales y, como consecuencia, las contribuiciones a pensiones también se incrementan. Por lo tanto, las contribuciones  $tau_t^p$ son distintas para cada hogar.
 
 == Agregación
 
@@ -324,18 +456,12 @@ Además de los ingresos por impuestos, el gobierno financia su gasto al contrata
 El sistema de pensiones opera en un esquema pay-as-you-go, lo que significa que recolecta contribuciones de las generaciones en edad de trabajar y directamente las distribuye a los retirados actuales. La ecuación de balance del presupuesto del sistema de pensiones está dada por
 
 $$
-\tau_t^p w_t L_t^s=\overline{p e n}_t N^R \quad \text { con } \quad N^R=\sum_{j=j_r}^J m_j \psi_j
+\tau_t^p w_t L_t^{\text{supply}, s=0}=\text{pen}_t N^R \quad \text { con } \quad N^R=\sum_{j=j_r}^J m_{j, s=0} \psi_j
 $$
 
-donde $N^R$ denota la cantidad de retirados. Dado que los pagos son hechos a todos los retirados en una forma lumpsum, simplemente se tiene que sumar el tamaño relativo del cohorte de la generación retirada en el lado del gasto y multiplicarlo por esa cantidad con el beneficio respectivo.
+donde $N^R$ denota la cantidad de retirados formales.
 
-Para la evolución de los pagos a pensiones en el tiempo se asume que están vinculados a las ganancias laborales promedio del periodo previo, es decir
-
-$$
-\overline{p e n}_t=\kappa_t \frac{w_{t-1} L_{t-1}^s}{N^L} \quad \text { con } \quad N^L=\sum_{j=1}^{j_r-1} m_j \psi_j
-$$
-
-donde $\kappa_t$ es la tasa de reemplazo del sistema de pensiones y $N^L$ es el tamaño (fijo) de los cohortes en edad de trabajar. Se asume que la tasa de reemplazo $\kappa_t$ está dada de forma exógena mientras que la tasa de contribución $\tau_t^p$ se ajusta con el objetivo de balancear el presupuesto.
+Se asume que la tasa de reemplazo $\kappa_t$ está dada de forma exógena mientras que la tasa de contribución $\tau_t^p$ se ajusta con el objetivo de balancear el presupuesto.
 `)
 
 == Mercados
