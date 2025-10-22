@@ -93,6 +93,15 @@
 
 #chapter("Mathematics", image: image("./orange2.jpg"))
 
+#mitext(`
+\begin{aligned}
+\mathcal{L}= & \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{1-\frac{1}{\gamma}}+\beta E\left[V\left(z^{+}\right) \mid \eta\right]+ \\
+& +\mu_1\left[\left(1+r_t^n\right) a+w_t^n h l+\mathbb{1}_{j \geq j_r} \kappa_t \bar{y}_t e p-a^{+}-p_t c\right] \\
+& +\mu_2 \mathbb{1}_{j<j_r}\left[\frac{j-1}{j} \cdot e p+\frac{1}{j} \cdot\left[\lambda+(1-\lambda) \cdot \frac{w_t h l}{\bar{y}_t}\right]-e p^{+}\right] \\
+& +\mu_2 \mathbb{1}_{j \geq j_r}\left[e p-e p^{+}\right]
+\end{aligned}
+`)
+
 == Theorems
 #index("Theorems")
 === Several equations<heading2>
@@ -271,7 +280,7 @@ Referencing @figure in-text using its label and referencing @figure1 in-text usi
 #figure(
   placement: bottom,
   image("creodocs_logo.svg", width: 100%),
-  caption: [Floating figure.],
+  caption: [  ting figure.],
 ) <figure1>
 
 #my-bibliography( bibliography("sample.bib",  style: "apa"))

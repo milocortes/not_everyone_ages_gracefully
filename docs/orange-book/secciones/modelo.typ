@@ -38,7 +38,13 @@ población $n_p$.
 En cada periodo $t$, la economía está poblada por $J$ generaciones traslapadas indizadas por $j=1, dots, J$. 
 
 
-El modelo integra el llamado *margen intensivo de la informalidad*, específicamente a los trabajadores que se emplean en unidades económicas formales pero que no cuentan con una relación patronal ni beneficios laborales definidos en la Ley, ni seguridad social#footnote[El *margen intensivo de la informalidad* es aún mas grande, pues contempla a las trabajadoras que se emplean en el *sector informal*. El INEGI define al sector informal como las actividades económicas que operan con recursos del hogar, sin constituirse formalmente como empresas, donde no se logra distinguir entre la unidad económica y el hogar. Es decir, hay dos formas de conceptualizar la informalidad : de acuerdo al sector económico donde se emplea la trabajadora y por la condición laboral]. El modelo incorpora trabajadores *informales* que laboran en unicades económicas formales y trabajadores *formales*#footnote[El modelo podría considerar a los trabajadores informales que se emplean en el sector informal al considerar unidades económicas que enfrentan una función de producción que usa unicamente el factor trabajo], los cuales son indizados como $s=1$ y $s=2$.  
+El modelo integra el llamado *margen intensivo de la informalidad*, específicamente a los trabajadores que se emplean en unidades económicas formales pero que no cuentan con una relación patronal ni beneficios laborales definidos en la Ley, ni seguridad social#footnote[El *margen intensivo de la informalidad* es aún mas grande, pues contempla a las trabajadoras que se emplean en el *sector informal*. El INEGI define al sector informal como las actividades económicas que operan con recursos del hogar, sin constituirse formalmente como empresas, donde no se logra distinguir entre la unidad económica y el hogar. Es decir, hay dos formas de conceptualizar la informalidad : de acuerdo al sector económico donde se emplea la trabajadora y por la condición laboral]. El modelo incorpora trabajadores *informales* que laboran en unicades económicas formales y trabajadores *formales*#footnote[El modelo podría considerar a los trabajadores informales que se emplean en el sector informal al considerar unidades económicas que enfrentan una función de producción que usa unicamente el factor trabajo]. La variable indicadora  $m_s in [0,1]$ denota el estado laboral del trabajador, donde $m_s=0$ corresponde a trabajadoras formales y $m_s = 1$ a trabajadoras informales. Las probabilidades de transición entre ambos estados es fija y no depende de la edad:
+
+#mitext(`
+\begin{equation}
+\pi_{j, m, m^{+}}=\operatorname{Pr}\left(m_{j+1}=m^{+} \mid m_j=m\right) \quad \text { con } \quad m, m^{+} \in\{0,1\},
+\end{equation}
+ `)
 
 Se asume que la supervivencia de un periodo al siguiente es estocástica y que $psi_j$ es la probabilidad que un agente sobreviva de la edad $j-1$ a la edad $j$, condicional a que vive en la edad $j-1$#footnote[Se asume que los trabajadores formales e informales tienen la misma tasa de supervivencia].
 
@@ -66,7 +72,7 @@ Los individuos tienen preferencias sobre consumo $c_{j, t}$ y ocio $l_{j, t}$, a
 Con $l_{j, t}$ denotando la cantidad de trabajo en horas ofrecido a mercado en el periodo $t$, tenemos $\mathrm{l}_{j, t}+ l_{j, t}=1$. La función de utilidad de los hogares se define como
 
 $$
-E\left[\sum_{j=1}^J \beta^{j-1}\left(\Pi_{i=1}^j \psi_{i, k}\right) u\left(c_{j, s}, 1-l_{j, s}\right)\right]
+E\left[\sum_{j=1}^J \beta^{j-1}\left(\Pi_{i=2}^j \psi_{i, s} m_{i-1,s}\right) u\left(c_{j, s}, 1-l_{j, s}\right)\right]
 $$
 
 donde $\beta$ denota el factor de descuento de tiempo.
@@ -158,6 +164,7 @@ Se agrega una restricción adicional de no negatividad de los ahorros #mitext(`$
 == Problema de programación dinámica
 
 El problema de optimización de los agentes es el siguiente:
+
 #mitext(`
 $$
 \begin{aligned}
@@ -167,10 +174,22 @@ V_t(z)=\max _{c, l, a^{+}} & u(c, 1-l)+\beta E\left[V_{t+1}\left(z^{+}\right) \m
 \end{aligned}
 $$
 
-donde $z=(j, a, \theta, \eta)$ es el vector de variables de estado individuales. Nótese que se colocó un índice de tiempo en la función de valor y en los precios. Esto es necesario para calcular la dinámica de la transición entre dos estados estacionarios. La condición terminal de la función de valor es
+\begin{equation}
+\begin{aligned}
+V_t(j, a, m, \eta) & =\max _{c, l, a^{+}, ep^{+}} u(c, 1-l)+\beta \psi_{j+1}(m) E\left[V\left(j+1, a^{+}, ep^{+}, m^{+}, \eta^{+}\right) \mid \eta, m\right] \\
+\text { s.t. } a^{+} & =\left\{\begin{array}{l}
+\left(1+r_t^n\right) a_{j, s, t-1}+w_t^n h_{j, s, t} l_{j, s, t}+b_{j, s, t}+p e n_{j, s, t}-p_t c_{j, s, t} \quad \text { si }  s=0 \\
+\left(1+r_t^n\right) a_{j, s, t-1}+w_t h_{j, s, t} l_{j, s, t}+b_{j, s, t}-p_t c_{j, s, t} \text{ si } s=1
+\end{array}\right., \\
+\eta^{+} & =\rho \eta+\epsilon^{+} \quad \text { con } \quad \epsilon^{+} \sim N\left(0, \sigma_\epsilon^2\right) \\
+\pi_{j, m, m^{+}} & =\operatorname{Pr}\left(m_{j+1}=m^{+} \mid m_j=m\right) \quad \text { con } \quad m, m^{+} \in\{0,1\} .
+\end{aligned}
+\end{equation}
+
+donde $z=(j, a, ep, m, \eta)$ es el vector de variables de estado individuales. Nótese que se colocó un índice de tiempo en la función de valor y en los precios. Esto es necesario para calcular la dinámica de la transición entre dos estados estacionarios. La condición terminal de la función de valor es
 
 $$
-V_t(z)=0 \quad \text { para } \quad z=(J+1, a, \theta, \eta)
+V_t(z)=0 \quad \text { para } \quad z=(J+1, a, ep, m, \eta)
 $$
 
 que significa que se asume que los agentes no valoran lo que sucede después de la muerte.
@@ -191,7 +210,18 @@ $$
 \frac{\nu\left[c\left(a^{+}\right)^\nu\left(1-l\left(a^{+}\right)\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{p_t c\left(a^{+}\right)}=\beta\left(1+r_{t+1}^n\right) \times E\left[\left.\frac{\nu\left[c_{t+1}\left(z^{+}\right)^\nu\left(1-l_{t+1}\left(z^{+}\right)\right)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{p_{t+1} c_{t+1}\left(z^{+}\right)} \right\rvert\, \eta\right]
 $$
 
-donde $a^{+}$es desconocido.
+
+
+Con la definición de la \textbf{implicit tax rate}, las condiciones de primer orden de los hogares se definen como
+
+\begin{equation}
+\begin{aligned}
+& \frac{v}{p_t} \cdot \frac{\left[c^\nu(1-l)^{1-\nu}\right]^{1-\frac{1}{\gamma}}}{c}=\beta E\left[V_{a^{+}}\left(z^{+}\right) \mid \eta\right] \\
+& \frac{1-\nu}{v} \cdot p_t c=w_t h(1-l)\left\{1-\tau_t^w-\tau_{j, t}^{i m p l}\right\}
+\end{aligned}
+\end{equation}
+
+donde $a^{+}$es desconocido. Nótese que $\tau_{j, t}^{i m p l} = \tau_{t}^p$ para $\lambda = 1$, lo que se reduce al modelo original.
 `)
 
 == Agregación
