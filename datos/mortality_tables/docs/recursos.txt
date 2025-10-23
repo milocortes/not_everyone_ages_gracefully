@@ -1,0 +1,4 @@
+https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Poblacion_Poblacion_01_e60cd8cf-927f-4b94-823e-972457a12d4b
+https://medium.com/@polanitzer/mortality-table-in-python-predict-israeli-male-probabilities-of-dying-and-surviving-c68734855050
+https://www.lifetable.de/File/GetDocument/data/MEX/MEX000019501950AU1.pdf
+
