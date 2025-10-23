@@ -42,7 +42,7 @@ global NA = 100
 # household preference parameters
 global gamma = 0.18
 global egam = 1.0 - 1.0/gamma
-global nu    = 0.45#OLG_params["nu"]# 2015 -- 0.3890
+global nu    = 0.3890#OLG_params["nu"]# 2015 -- 0.3890
 global beta  = 0.998^5
 
 # household risk process

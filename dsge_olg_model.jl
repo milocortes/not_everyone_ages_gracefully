@@ -45,7 +45,7 @@ global NR = 10
 # household preference parameters
 global gamma = 0.18
 global egam = 1.0 - 1.0/gamma
-global nu    = 0.45#OLG_params["nu"]# 2015 -- 0.3890
+global nu    = 0.45 #OLG_params["nu"]# 2015 -- 0.3890
 global beta  = 0.998^5
 
 # household risk process
@@ -186,14 +186,15 @@ tauc  .= 0.05737 # Tasa efectiva de recaudación 5.737%
 tauw  .= 0.12733 # Tasa efectiva de recaudación 12.733%
 taur  .= 0.0 # Tasa efectiva de recaudación 12.131%
 taup  .= 0.12
-kappa .= 0.70 #OLG_params["kappa"]# 2015 - 0.643
+kappa .= OLG_params["kappa"]# 2015 - 0.643
 #lambda = 1d0
-lambda .= 0.5
+lambda .= 0.0
 penp .= 0.0
-gy    = 0.11 #OLG_params["gy"] # 2015 -- 0.1820
+gy    = 0.11 # Gasto de consumo final del gobierno general (% del PIB) . https://datos.bancomundial.org/indicador/NE.CON.GOVT.ZS  || OLG_params["gy"] # 2015 -- 0.1820 
 by    = 0.523/5.0 # 2015 0.442/5.0
 
-
+# Proportion of formal employment
+global formal_employment = 0.7596
 ## Files
 global file_output
 global file_summary
@@ -247,10 +248,28 @@ pension_system = DataFrame(
     PP=[PP[0], PP[0] / YY[0] * 100]
 );
 
+
+### Plot results between skills
+ages = 15 .+ (1:JJ)*5
+
+plot(ages, c_coh[:, 0, 0], ylabel = "Consumption", xlabel = "Age j", label="Good Health")
+plot!(ages, c_coh[:, 1, 0], label="Bad Health")
+
+
+plot(ages, l_coh[:, 0, 0], ylabel = "Working time", xlabel = "Age j", label="Good Health")
+plot!(ages, l_coh[:, 1, 0], label="Bad Health")
+
+plot(ages, y_coh[:, 0, 0], ylabel = "Earnings", xlabel = "Age j", label="Good Health")
+plot!(ages, y_coh[:, 1, 0], label="Bad Health")
+
+
+plot(ages, a_coh[:, 0, 0], ylabel = "Assets", xlabel = "Age j", label="Good Health")
+plot!(ages, a_coh[:, 1, 0], label="Bad Health")
+
 # set reform parameters (adjust accordingly for Figure 11.8)
 #lambda(0:TT) = 0.99d0
-kappa[1:TT] .= 0.19;
-
+#kappa[1:TT] .= 0.19;
+lambda .= 1.0
 
 # calculate transition path without lsra
 lsra_on = false

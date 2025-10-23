@@ -29,9 +29,7 @@ def _(Path, pd):
 
     # Cargamos pirámides poblacionales de 1950 y 2020
     piramide_1950 = pd.read_csv(FP/"data/piramide_poblacional_mexico_1950.csv").rename(columns={"total" : "lx"})
-    piramide_2020 = pd.read_csv(FP/"data/piramide_poblacional_mexico_2020.csv").rename(columns={"total" : "lx"})
-
-
+    piramide_2020 = pd.read_csv(FP/"data/piramide_poblacional_mexico_2020.csv").rename(columns={"total" : "lx"}).iloc[5:].reset_index(drop=True)
     return (piramide_2020,)
 
 
@@ -58,7 +56,7 @@ def _(piramide_2020):
     piramide_2020["dx"] = 0
 
     for x in range(piramide_2020.shape[0]):
-    
+
          if x >=piramide_2020.shape[0]-1:
              piramide_2020["dx"][x] = piramide_2020["lx"][x]
          else:
@@ -115,7 +113,6 @@ def _(mo):
     \begin{equation}
     px  = (1 - qx)
     \end{equation}
-
     """
     )
     return
@@ -140,7 +137,6 @@ def _(piramide_2020):
 def _(piramide_2020):
     for id_px, px in enumerate(piramide_2020["px"]):
         print(f"psi[{id_px+1},0:TT] .= {px}")
-    
     return
 
 

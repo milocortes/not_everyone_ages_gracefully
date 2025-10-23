@@ -236,19 +236,32 @@ function initialize()
     println("ITER     H     K/Y     C/Y     I/Y       r       w        DIFF")
 
     #survival probabilities
-    psi[1:6,0:TT] .= 1.00000000
-    psi[7,0:TT] .= 0.98972953
-    psi[8,0:TT] .= 0.98185396
-    psi[9,0:TT] .= 0.97070373
-    psi[10,0:TT] .= 0.95530594
-    psi[11,0:TT] .= 0.93417914
-    psi[12,0:TT] .= 0.90238714
-    psi[13,0:TT] .= 0.83653436
-    psi[14,0:TT] .= 0.71048182
-    psi[15,0:TT] .= 0.52669353
-    psi[16,0:TT] .= 0.31179803
-    psi[17,0:TT] .= 0.00000000
+    #psi[1:6,0:TT] .= 1.00000000
+    #psi[7,0:TT] .= 0.98972953
+    #psi[8,0:TT] .= 0.98185396
+    #psi[9,0:TT] .= 0.97070373
+    #psi[10,0:TT] .= 0.95530594
+    #psi[11,0:TT] .= 0.93417914
+    #psi[12,0:TT] .= 0.90238714
+    #psi[13,0:TT] .= 0.83653436
+    #psi[14,0:TT] .= 0.71048182
+    #psi[15,0:TT] .= 0.52669353
+    #psi[16,0:TT] .= 0.31179803
+    #psi[17,0:TT] .= 0.00000000
+    psi[1:6,0:TT] .= 1.0
+    psi[7,0:TT] .= 0.9831988881635502
+    psi[8,0:TT] .= 0.9741132590754671
+    psi[9,0:TT] .= 0.9552301508355022
+    psi[10,0:TT] .= 0.924117113631059
+    psi[11,0:TT] .= 0.8441225308350908#0.8827445298434654
+    psi[12,0:TT] .= 0.7885388351574051
+    psi[13,0:TT] .= 0.6330041301328317
+    psi[14,0:TT] .= 0.4567523925936981
+    psi[15,0:TT] .= 0.30271355625944116
+    psi[16,0:TT] .= 0.20041570609265538
+    psi[17,0:TT] .= 0.0
 
+    
     # set bequest distribution
     omega[1] = 1.0/6.0
     omega[2] = 1.0/6.0
@@ -260,7 +273,7 @@ function initialize()
 
     # set up population structure and bequest configuration
     for it in 0:TT
-        m[1, 0, it] = 0.44
+        m[1, 0, it] = formal_employment #0.9#0.44
         m[1, 1, it] = 1.0 - m[1, 0, it]
         
         itm = year2(it, -1)
@@ -325,7 +338,7 @@ function initialize()
     eff[JR:JJ,1] .= 0.0
 
     # initialize fixed effect
-    dist_theta[0] = 0.44
+    dist_theta[0] = formal_employment #0.9#0.44
     dist_theta[1] = 1 - dist_theta[0]
 
     theta[0]   = 1.0
