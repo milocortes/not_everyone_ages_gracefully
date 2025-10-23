@@ -1,6 +1,6 @@
 import pandas as pd 
 
-year_analysis_pwt = 2023
+year_analysis_pwt = 2022
 year_analysis_oecd_fpi = 2021
 year_analysis_oecd_rs = 2021
 year_analysis_oecd_tax_db = 2021
@@ -126,7 +126,7 @@ OECD-Revenue Statistics:
     * Labour-earnings tax (OECD-Revenue Statistics-1000 Taxes on income, profits and capital gains as % GDP)    
     * Capital-income tax (OECD-Revenue Statistics-1000 Taxes on income, profits and capital gains as % GDP)    
 """
-oecd_rs = pd.read_csv("oecd/taxes_as_percentage_gdp/REV_08102023224830389.csv")
+oecd_rs = pd.read_csv("oecd/taxes_as_percentage_gdp/REV_08102023224830389.zip")
 oecd_rs = oecd_rs[oecd_rs.Country.isin(['Chile', "Costa Rica", "Mexico"])]
 
 oecd_rs_gpd = oecd_rs[(oecd_rs["Tax revenue"]=='1000 Taxes on income, profits and capital gains') | (oecd_rs["Tax revenue"]=='5000 Taxes on goods and services')].query(f"GOV == 'FED' and VAR =='TAXGDP' and Year =={year_analysis_oecd_rs}")

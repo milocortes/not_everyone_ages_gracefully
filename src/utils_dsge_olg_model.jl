@@ -68,8 +68,8 @@ function foc(x_in)
     v_ind = v[ij_com, ia_com, ir_com, ip_com, is_com, it_com]
 
     # calculate the marginal wage rate
-    wage = w[it_com]*eff[ij_com]*theta[ip_com]*eta[is_com]
-    wagen = ((1.0 - ip_com)*wn[it_com] + ip_com*wn_inf_intensivo[it_com])*eff[ij_com]*theta[ip_com]*eta[is_com]
+    wage = w[it_com]*eff[ij_com, ip_com]*theta[ip_com]*eta[is_com]
+    wagen = ((1.0 - ip_com)*wn[it_com] + ip_com*wn_inf_intensivo[it_com])*eff[ij_com, ip_com]*theta[ip_com]*eta[is_com]
 
     # calculate available resources
     available = (1.0+rn[it_com])*a[ia_com] + beq[ij_com, it_com]  + (1.0 - ip_com)*penp[ij_com, it_com, ir_com] + v_ind
@@ -302,16 +302,27 @@ function initialize()
     end
 
     # initialize age earnings process
-    eff[1] = 1.0000
-    eff[2] = 1.3527
-    eff[3] = 1.6952
-    eff[4] = 1.8279
-    eff[5] = 1.9606
-    eff[6] = 1.9692
-    eff[7] = 1.9692
-    eff[8] = 1.9392
-    eff[9] = 1.9007
-    eff[JR:JJ] .= 0.0
+    eff[1,0] = 1.0000
+    eff[2,0] = 1.377623
+    eff[3,0] = 1.539737
+    eff[4,0] = 1.564534
+    eff[5,0] = 1.747741
+    eff[6,0] = 1.569338
+    eff[7,0] = 1.564102
+    eff[8,0] = 1.618386
+    eff[9,0] = 1.088493
+    eff[JR:JJ,0] .= 0.0
+
+    eff[1,1] = 1.044942
+    eff[2,1] = 1.120803
+    eff[3,1] = 1.15399
+    eff[4,1] = 1.12119
+    eff[5,1] = 1.121919
+    eff[6,1] = 1.0938
+    eff[7,1] = 1.061719
+    eff[8,1] = 1.024641
+    eff[9,1] = 1.403929
+    eff[JR:JJ,1] .= 0.0
 
     # initialize fixed effect
     dist_theta[0] = 0.44
@@ -341,11 +352,11 @@ function initialize()
     BQ[0] = 0.0#
 
     # initial guesses for macro variables
-    KK .= 3.0288 # 5.14
-    LL .= 2.7216 # 5.34
-    YY .= 4.7981 # 8.42
+    KK .= 4.9866 # 5.14
+    LL .= 2.6668 # 5.34
+    YY .= 6.4895 # 8.42
     II .= (n_p+delta)*KK
-    INC .= 0.3859 # 0.72
+    INC .= 0.4942 # 0.72
 
     GG .= gy*YY[0]
     BB .= by*YY[0]
@@ -614,7 +625,7 @@ function aggregation(it)
                     for is in 1:NS
                         c_coh[ij, ip, it] = c_coh[ij, ip, it] + c[ij, ia, ir, ip, is, it]*phi[ij, ia, ir, ip, is, it]/frac_phi[ij, ip,it]
                         l_coh[ij, ip, it] = l_coh[ij, ip, it] + l[ij, ia, ir, ip, is, it]*phi[ij, ia, ir, ip, is, it]/frac_phi[ij, ip,it]
-                        y_coh[ij, ip, it] = y_coh[ij, ip, it] + eff[ij]*theta[ip]*eta[is]*l[ij, ia, ir, ip, is, it]*phi[ij, ia, ir, ip, is, it]/frac_phi[ij, ip,it]
+                        y_coh[ij, ip, it] = y_coh[ij, ip, it] + eff[ij, ip]*theta[ip]*eta[is]*l[ij, ia, ir, ip, is, it]*phi[ij, ia, ir, ip, is, it]/frac_phi[ij, ip,it]
                         a_coh[ij, ip, it] = a_coh[ij, ip, it] + a[ia]*phi[ij, ia, ir, ip, is, it]/frac_phi[ij, ip,it]
 
                         if ip == 0
@@ -1005,7 +1016,7 @@ function output(it)
                             mas_l[ij] = mas_l[ij] + phi[ij, ia, ir, ip, is, it]
 
                             # earnings
-                            temp = log(w[it]*eff[ij]*theta[ip]*eta[is]*l[ij, ia, ir, ip, is, it])
+                            temp = log(w[it]*eff[ij, ip]*theta[ip]*eta[is]*l[ij, ia, ir, ip, is, it])
                             exp_y[ij] = exp_y[ij] + temp*phi[ij, ia, ir, ip, is, it]
                             var_y[ij] = var_y[ij] + temp^2*phi[ij, ia, ir, ip, is, it]
                             mas_y[ij] = mas_y[ij] + phi[ij, ia, ir, ip, is, it]
@@ -1173,7 +1184,7 @@ function LSRA()
                         v_tilde = (VV_0-VV_1)/dVV_dv
 
                         # restrict z_tilde to income maximum
-                        v_tilde = max(v_tilde, -((1.0+rn[1])*a[ia] + (1-ip)*penp[ij, 1, ir] + ((1.0 - ip)*wn[1] + ip*wn_inf_intensivo[1])*eff[ij]*theta[ip]*eta[is]*0.99 + v[ij, ia, ir, ip, is, 1]))
+                        v_tilde = max(v_tilde, -((1.0+rn[1])*a[ia] + (1-ip)*penp[ij, 1, ir] + ((1.0 - ip)*wn[1] + ip*wn_inf_intensivo[1])*eff[ij, ip]*theta[ip]*eta[is]*0.99 + v[ij, ia, ir, ip, is, 1]))
 
                         # check whether individual is already compensated
                         lsra_all = lsra_all + phi[ij, ia, ir, ip, is, 1]/frac_phi[ij, ip,1]*m_adjusted[ij, ip, 1]

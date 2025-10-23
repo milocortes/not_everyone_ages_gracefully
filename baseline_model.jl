@@ -128,7 +128,7 @@ for param = [:m, :pop, :m_adjusted]
     @eval global $param = OffsetArray(zeros(JJ, NP+1, TT+1), 1:JJ, 0:NP, 0:TT)
 end
 
-global eff = zeros(JJ)
+global eff =  OffsetArray(zeros(JJ, NP+1), 1:JJ, 0:NP)
 
 # individual variables
 global a = OffsetArray(zeros(NA+1), 0:NA)

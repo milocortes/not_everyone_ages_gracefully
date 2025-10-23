@@ -143,7 +143,7 @@ end
 global workpop = OffsetArray(zeros(TT+1), 0:TT)
 global INC = OffsetArray(zeros(TT+1), 0:TT)
 
-global eff = zeros(JJ)
+global eff =  OffsetArray(zeros(JJ, NP+1), 1:JJ, 0:NP)
 
 # individual variables
 global a = OffsetArray(zeros(NA+1), 0:NA)
