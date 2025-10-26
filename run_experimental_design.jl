@@ -18,7 +18,7 @@ Pkg.activate("env")
 include("src/utils_dsge_olg_model.jl")
 
 using OffsetArrays
-using Plots
+#using Plots
 using DataFrames
 using CSV 
 
@@ -200,19 +200,6 @@ by    = 0.523/5.0 # 2015 0.442/5.0
 
 # Proportion of formal employment
 global formal_employment = 0.7596
-## Files
-global file_output
-global file_summary
-
-
-## Compute Steady State
-get_SteadyState()
-
-
-# set reform parameters 
-
-## Carga diseño experimental
-experimental_design = CSV.read("datos/experimental_design/experimental_design.csv", DataFrame)
 
 ## Escoge el indice del servidor
 using HTTP.WebSockets
@@ -223,6 +210,26 @@ WebSockets.open("ws://127.0.0.1:8081") do ws
         
     end;
 
+
+## Files
+global file_output
+global file_summary
+
+# open files
+file_output = open("output_"*string(id)*".out", "w");
+file_summary = open("summary_"*string(id)*".out", "w");
+
+## Compute Steady State
+get_SteadyState()
+
+
+# set reform parameters 
+
+## Carga diseño experimental
+experimental_design = CSV.read("datos/experimental_design/experimental_design.csv", DataFrame)
+
+
+
 kappa[1:TT] .= experimental_design[id,:]["kappa"]
 lambda[1:TT] .= experimental_design[id,:]["lambda"]
 
@@ -230,15 +237,61 @@ lambda[1:TT] .= experimental_design[id,:]["lambda"]
 lsra_on = false
 get_transition()
 
-pension_system = DataFrame(
-    etiqueta=["valor", "(in %)"],
-    TAUP=[taup[TT] * w[TT] * LL[TT], taup[TT] * 100],
-    #PEN=[pen[JR, 0], kappa[0]],
-    PP=[PP[TT], PP[TT] / YY[TT] * 100]
-);
+## Guardamos resultados de las Variables agregadas
 
-pension_system[:, "id"] .= id
+results_1D_df = []
+
+for param = [:r, :rn, :w, :wn, :p, :KK, :AA, :BB, :LL, :HH, :YY, :CC, :II, :GG, :INC, :BQ, :tauc, :tauw, :taur, :taup, :kappa, :PP]
+    push!(results_1D_df,
+        @eval DataFrame($param = [$param...])  
+    )
+end
+
+results_1D_df = hcat(results_1D_df...)
+
+## Variables por cohorte
+
+results_2D_df = []
+
+
+for param = [:c_coh, :y_coh, :l_coh, :a_coh, :v_coh, :VV_coh]
+    for (ind_skill, name_skill) in enumerate(["formal","informal"])
+        var_name = string(param)
+        @eval col_names = [string($var_name,"_cohort_",i,"_",$name_skill) for i in 1:size($param.parent)[1]]
+        push!(results_2D_df,
+            @eval DataFrame(OffsetArrays.no_offset_view($param[:,$ind_skill - 1, :])', col_names)
+        )
+    end
+end
+
+results_2D_df = hcat(results_2D_df...)
+
+## Pensiones
+df_pensiones = DataFrame(pen.parent', :auto)
+rename!(df_pensiones, ["pension_coho_"*string(j) for j in 1:JJ])
+
+## Recaudación de impuestos
+df_tax_rev = DataFrame(OffsetArrays.no_offset_view(taxrev)', ["tauc_rev", "tauw_rev", "taur_rev", "total_tax_rev"])
+
+results_all = hcat([ DataFrame(time = 0:TT, lambda = [lambda[2] for i in 0:TT]), results_1D_df, results_2D_df, df_tax_rev, df_pensiones]...)
+
+
+# TODO
+# calculate transition path with lsra
+lsra_on = true
+get_transition()
+
+# Agrega ganancia de eficiencia
+results_all[:, :hicksian] .= (Lstar^(1.0/egam)-1.0)*100.0
+
+# Agrega id de ejecución
+results_all[:, "id"] .= id
+
+# close files
+close(file_output)
+close(file_summary)
+
 
 ## Guardamos el diseño experimental
-CSV.write(joinpath(pwd(),"output" , "pension_system_"*string(id)*".csv"), pension_system)
+CSV.write(joinpath(pwd(),"output" , "results_all_"*string(id)*".csv"), results_all)
 
