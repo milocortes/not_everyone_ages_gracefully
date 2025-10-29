@@ -89,7 +89,15 @@
 #include "secciones/datos.typ"
 
 
-#part("Part Two Title")
+// +++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++
+// **********  Resultados de la Simulación
+// +++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++
+#part("Resultados de la Simulación")
+
+#include "secciones/resultados_simulacion.typ"
+
 
 #chapter("Mathematics", image: image("./orange2.jpg"))
 

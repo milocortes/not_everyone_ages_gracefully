@@ -38,7 +38,7 @@ población $n_p$.
 En cada periodo $t$, la economía está poblada por $J$ generaciones traslapadas indizadas por $j=1, dots, J$. 
 
 
-El modelo integra el llamado *margen intensivo de la informalidad*, específicamente a los trabajadores que se emplean en unidades económicas formales pero que no cuentan con una relación patronal ni beneficios laborales definidos en la Ley, ni seguridad social#footnote[El *margen intensivo de la informalidad* es aún mas grande, pues contempla a las trabajadoras que se emplean en el *sector informal*. El INEGI define al sector informal como las actividades económicas que operan con recursos del hogar, sin constituirse formalmente como empresas, donde no se logra distinguir entre la unidad económica y el hogar. Es decir, hay dos formas de conceptualizar la informalidad : de acuerdo al sector económico donde se emplea la trabajadora y por la condición laboral]. El modelo incorpora trabajadores *informales* que laboran en unicades económicas formales y trabajadores *formales*#footnote[El modelo podría considerar a los trabajadores informales que se emplean en el sector informal al considerar unidades económicas que enfrentan una función de producción que usa unicamente el factor trabajo]. La variable indicadora  $m_s in [0,1]$ denota el estado laboral del trabajador, donde $m_s=0$ corresponde a trabajadoras formales y $m_s = 1$ a trabajadoras informales. Las probabilidades de transición entre ambos estados es fija y no depende de la edad:
+El modelo integra el llamado *margen intensivo de la informalidad*, específicamente a los trabajadores que se emplean en unidades económicas formales pero que no cuentan con una relación patronal ni beneficios laborales definidos en la Ley, ni seguridad social#footnote[El *margen intensivo de la informalidad* es aún mas grande, pues contempla a las trabajadoras que se emplean en el *sector informal*. El INEGI define al sector informal como las actividades económicas que operan con recursos del hogar, sin constituirse formalmente como empresas, donde no se logra distinguir entre la unidad económica y el hogar. Es decir, hay dos formas de conceptualizar la informalidad : de acuerdo al sector económico donde se emplea la trabajadora y por la condición laboral]. El modelo incorpora trabajadores *informales* que laboran en unicades económicas formales y trabajadores *formales*#footnote[El modelo podría considerar a los trabajadores informales que se emplean en el sector informal al considerar unidades económicas que enfrentan una función de producción que usa unicamente el factor trabajo]. Cuando los individuos entran al mercado laboral, son asignados como trabajor informal o formal de acuerdo a una distribución de probabilidad $omega_s$#footnote[Esta distribución es calculada empiricamente mediante la matriz de hussmans del INEGI] . La variable indicadora  $m_s in [0,1]$ denota el estado laboral del trabajador, donde $m_s=0$ corresponde a trabajadoras formales y $m_s = 1$ a trabajadoras informales. Las probabilidades de transición entre ambos estados es fija y no depende de la edad:
 
 #mitext(`
 \begin{equation}
@@ -63,6 +63,10 @@ Se asume que la población crece a una tasa constante $n_{p,t} = n_p$ y es la mi
 La trayectoria de crecimiento balanceado, es decir donde todas las variables agregadas crecen a una misma tasa, se fija a la tasa de crecimiento del cohorte más joven. Se normalizan dichas variables agregadas al tiempo $t$ por el tamaño del cohorte más joven que está viviendo en ese periodo.
           `)
 
+Todos los agentes se retiran a la edad $j_r$. Los agentes que laboraron en el sector formal  comienzan a recibir una pensión la cual es financiada por el impuesto a nómina. Durante la edad laboral de los trabajadores formales acumulan *earning points* $e p_j$ que definen sus pagos de pensión cuando se retiran.
+
+Por simplicidad, omitiremos el índice $s$ en la medida de lo posible.
+ 
 == Decisiones de los hogares
 
 === Preferencias de los hogares
@@ -113,7 +117,7 @@ donde $r_t^n$ es la tasa de interés neta en $t$ y $a_{j,s,t}$ son los activos d
 
 === Riesgo en la productividad laboral
 #mitext(`
-Los individuos difieren respecto a su productividad laboral $h_{j, t}$, la cual depende de un perfil (determinístico) de ingresos por edad $e_j$, un efecto de productividad fijo $\theta$ que es definido al comienzo del ciclo de vida, y de un componente autoregresivo $\eta_{j, t}$ que evoluciona en el tiempo y que tiene una estructura autoregresiva de orden 1, de manera que
+Los individuos difieren respecto a su productividad laboral $h_{j, t}$, la cual depende de un perfil (determinístico) de ingresos por edad $e_{j,s}$ que depende del tipo de trabajo, un efecto de productividad fijo $\theta$ que es definido al comienzo del ciclo de vida y que, de igual forma, depende del tipo de trabajo (formal e informal) al que son asignados\footnote{Representa un shock permanente}. Además, se agrega un shock idiosincrático mediante un componente autoregresivo $\eta_{j, t}$ que evoluciona en el tiempo y que tiene una estructura autoregresiva de orden 1, de manera que
 
 $$
 \eta_j=\rho \eta_{j-1}+\epsilon_j \quad \text { con } \quad \epsilon_j \sim N\left(0, \sigma_\epsilon^2\right) \quad \text { y } \quad \eta_1=0
@@ -128,6 +132,14 @@ $$
 `)
 
 === Problema de Decisión de los Consumidores
+El estado de los individuos se carateriza por el vector de estado#footnote[Se asume que los shocks de productividad son independientes entre individuos e identicamente distribuidos entre individuos de un tipo de trabajo en específico.]
+#mitext(`
+\begin{equation}
+z_j = (J, a, ep, s, \eta)
+\end{equation}
+`)
+
+
 Los hogares maximizan la función de utilidad sujeta a la restricción presupuestaria intertemporal
 
 #mitext(`
@@ -158,20 +170,20 @@ El problema de optimización de los agentes es el siguiente:
 
 \begin{equation}
 \begin{aligned}
-V_t(j, a, m, \eta) & =\max _{c, l, a^{+}, ep^{+}} u(c, 1-l)+\beta \psi_{j+1}(m) E\left[V\left(j+1, a^{+}, ep^{+}, m^{+}, \eta^{+}\right) \mid \eta, m\right] \\
+V_t(j, a, ep, s, \eta) & =\max _{c, l, a^{+}, ep^{+}} u(c, 1-l)+\beta \psi_{j+1}(m_s) E\left[V\left(j+1, a^{+}, ep^{+}, s^{+}, \eta^{+}\right) \mid \eta, m_s\right] \\
 \text { s.t. } a^{+} & =\left\{\begin{array}{l}
 \left(1+r_t^n\right) a_{j, s, t-1}+w_t^n h_{j, s, t} l_{j, s, t}+b_{j, s, t}+p e n_{j, s, t}-p_t c_{j, s, t} \quad \text { si }  s=0 \\
 \left(1+r_t^n\right) a_{j, s, t-1}+w_t h_{j, s, t} l_{j, s, t}+b_{j, s, t}-p_t c_{j, s, t} \text{ si } s=1
 \end{array}\right., \\
 \eta^{+} & =\rho \eta+\epsilon^{+} \quad \text { con } \quad \epsilon^{+} \sim N\left(0, \sigma_\epsilon^2\right) \\
-\pi_{j, m, m^{+}} & =\operatorname{Pr}\left(m_{j+1}=m^{+} \mid m_j=m\right) \quad \text { con } \quad m, m^{+} \in\{0,1\} .
+\pi_{j, m, m^{+}} & =\operatorname{Pr}\left(m_{j+1, s}=m^{+}_{s} \mid m_{j, s}=m_s\right) \quad \text { con } \quad m_s, m_s^{+} \in\{0,1\} .
 \end{aligned}
 \end{equation}
 
-donde $z=(j, a, ep, m, \eta)$ es el vector de variables de estado individuales. Nótese que se colocó un índice de tiempo en la función de valor y en los precios. Esto es necesario para calcular la dinámica de la transición entre dos estados estacionarios. La condición terminal de la función de valor es
+donde $z=(j, a, ep, s, \eta)$ es el vector de variables de estado individuales. Nótese que se colocó un índice de tiempo en la función de valor y en los precios. Esto es necesario para calcular la dinámica de la transición entre dos estados estacionarios. La condición terminal de la función de valor es
 
 $$
-V_t(z)=0 \quad \text { para } \quad z=(J+1, a, ep, m, \eta)
+V_t(z)=0 \quad \text { para } \quad z=(J+1, a, ep, s, \eta)
 $$
 
 que significa que se asume que los agentes no valoran lo que sucede después de la muerte.
@@ -356,6 +368,7 @@ En consecuencia, definimos la *tasa de impuesto implícita* del sistema de pensi
 
 Esta tasa de impuesto implícita toma en cuenta que, si $lambda lt.small 1$, los pagos a pensiones se incrementan al incrementarse los ingresos laborales y, como consecuencia, las contribuiciones a pensiones también se incrementan. Por lo tanto, las contribuciones  $tau_t^p$ son distintas para cada hogar.
 
+/*
 == Agregación
 
 Con el objetivo de agregar las decisiones individuales para cada elemento del espacio de estados a las cantidades agregadas de la economía, necesitamos determinar la distribución de los hogares ϕt(z)ϕt​(z) en el espacio de estados. Se asume que, de alguna manera, hemos discretizado el espacio de estados. Podemos aplicar el procedimiento descrito por @fehr2018introduction.
@@ -414,8 +427,8 @@ A_t & =\sum_{j=1}^J \frac{m_{j, t}}{\psi_{j, t}} \bar{a}_{j, t}
 \end{aligned}
 $$
 `)
-
-== Empresas 
+*/
+== Tecnología 
 #mitext(`
 Las empresas contratan capital $K_t$ y trabajo $L_t$ en un mercado de factores perfectamente competitivo para producir un único bien $Y_t$ de acuerdo a una tecnología de producción dada por una función de producción Cobb-Douglas
 
@@ -438,6 +451,7 @@ $$
 & w_t=(1-\alpha) \Omega\left[\frac{K_t}{L_t}\right]^\alpha
 \end{aligned}
 $$
+
 `)
 
 == Gobierno
@@ -461,7 +475,15 @@ $$
 
 donde $N^R$ denota la cantidad de retirados formales.
 
-Se asume que la tasa de reemplazo $\kappa_t$ está dada de forma exógena mientras que la tasa de contribución $\tau_t^p$ se ajusta con el objetivo de balancear el presupuesto.
+Se asume que la tasa de reemplazo $\kappa$ está dada de forma exógena mientras que la tasa de contribución $\tau_t^p$ se ajusta con el objetivo de balancear el presupuesto.
+
+El beneficio de la pensión se calcula por la suma de earnings points acumulados durante el periodo laboral y el \textit{monto actual de pensión}, APA\footnote{Actual Pension Amount.} que refleja el valor monetario de cada earning point, multiplicado por la tasa de reemplazo $\kappa$ 
+
+\begin{equation}
+p_j = \kappa \times \text{ep}_{j_r} \times \text{APA}
+\end{equation}
+
+Con el tiempo, APA crece con los ingresos laborales brutos.
 `)
 
 == Mercados

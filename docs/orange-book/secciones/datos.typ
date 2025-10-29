@@ -15,11 +15,11 @@ Cada periodo del modelo corresponde a 5 años en la vida real. Se supone que los
 
 Dado que estamos considerando que un periodo corresponde a 5 años, algunas tasas anuales deben ser convertidas. Pensando el caso de la tasa de crecimiento de la población, suponiendo una tasa de crecimiento anual de 1 por ciento, la conversión a una tasa compuesta a 5 años sería igual a $n_p=1.01^5-1 ~ 0.05$.
 
-La razón de capital en el producto es obtenida de directamente de los datos. Se utilizó la información de PWT 10.01, Penn World Table para el dato de Chile, Costa Rica y México. De este recurso también se obtuvo la razón de ingreso laboral en el producto. El perfil de productividad dada la edad se toma la sugerida por Fehr y Kindermann (2018), y fue obtenida de la literatura.
+La razón de capital así como la razón de ingreso laboral en el producto es obtenida de PWT 10.01, Penn World Table. El perfil de productividad dada la edad se calculó con la Encuesta Nacional de Ocupación y Empleo (ENOE), para el segundo trimestre de 2021.
 
-El gasto público total como fracción del GDP es obtenido de PWT 10.01, Penn World Table, mientras que la razón deuda pública-GDP fue obtenido de banco de datos de CEPAL.
+El gasto público total como fracción del GDP es obtenido del Banco Mundial y corresponde al gasto en consumo final del gobierno#footnote[https://data.worldbank.org/indicator/NE.CON.GOVT.ZS], mientras que la razón deuda pública-GDP fue obtenido de banco de datos de CEPAL.
 
-Para la calibración de los modelos para los tres países, consideramos 2015 como el año base, de manera que todos los parámetros exógenos corresponden a este año.
+Para la calibración del modelo consideramos 2021 como el año base, de manera que todos los parámetros exógenos corresponden a este año.
 
 == Parámetros calibrados
 
@@ -36,11 +36,15 @@ Resta parametrizar el esquema del sistema de impuestos y del sistema de pensione
 3. Definir exógenamente el valor de $tau_t^c$ y $tau_t^r$, calcular el valor de $tau_t^w$.
 4. Definir exógenamente el valor de $tau_t^c$ y $tau_t^w$, calcular el valor de $tau_t^r$.
 
-Para las ejecuciones del modelo se definió el esquema 3 , es decir, de forma exógena asignamos un valor de la tasa de impuesto al consumo y el modelo calcula las tasas de impuestos al ingreso laboral y de capital. Los valores de la tasa de impuestos al consumo fueron obtenidas de OECD Tax Database.
+Para las ejecuciones del modelo se definió el esquema 4 , es decir, de forma exógena asignamos un valor de la tasa de impuesto al consumo y al ingreso laboral, y el modelo calcula la tasa de impuesto del capital. Se utilizaron los cálculos de las tasas efectivas de los impuestos al consumo y al ingreso realizados por el CIEP.
 
 Con respecto al sistema de pensiones, tenemos que definir la tasa de reemplazo $kappa$. El valor observado de la tasa de reemplazo para los tres países fue obtenido de OECD-Founded Pension Indicators-Contributions.
 
 El valor del factor de descuento intertemporal $beta$ fue el mismo que el usado por los autores.
+
+Para el equilibrio inicial, consideramos que el sistema de pensiones es regresivo, es decir el factor de progresividad $lambda=1$.
+
+Las tasas de probabilidad de muerte fueron estimadas con las pirámides poblacionales por cohorte de edad del Censo de Población y Vivienda de 2020.  
 
 == Resumen de parámetros exógenos (*E*), calibrados (*C*) y objetivos (*T*) 
 
