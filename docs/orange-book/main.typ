@@ -8,10 +8,10 @@
 //#show raw: set text(font: "Fira Code")
 
 #show: book.with(
-  title: "Exploring the Physical Manifestation of Humanity’s Subconscious Desires",
-  subtitle: "A Practical Guide",
+  title: "Not Everyone Ages Gracefully: Fiscal Adjustments to Exogenous Shocks in Three Latin American Countries ",
+  subtitle: "",
   date: "Anno scolastico 2023-2024",
-  author: "Goro Akechi",
+  author: "",
   main-color: rgb("#F36619"),
   lang: "es",
   cover: image("./background.svg"),
@@ -26,7 +26,7 @@
 
     PUBLISHED BY PUBLISHER
 
-    #link("https://github.com/flavio20002/typst-orange-template", "TEMPLATE-WEBSITE")
+    #link("https://github.com/milocortes/not_everyone_ages_gracefully", "TEMPLATE-WEBSITE")
 
     Licensed under the Apache 2.0 License (the “License”).
     You may not use this file except in compliance with the License. You may obtain a copy of
@@ -94,7 +94,7 @@
 // **********  Resultados de la Simulación
 // +++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++
-#part("Resultados de la Simulación")
+#part("Efectos Macroeconómicos, de Bienestar, Eficiencia y Sostenibilidad Fiscal de las Políticas")
 
 #include "secciones/resultados_simulacion.typ"
 
