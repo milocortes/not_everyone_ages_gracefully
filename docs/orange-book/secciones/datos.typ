@@ -57,27 +57,28 @@ Se muestra también las salidas del modelo que son definidas como targets de cal
 | *Parámetro* | *Descripción* | *E* | *C* | *T* | *Descripción* |
 | :---: | :--- | :--- | :--- | :--- | :--- |
 | TT | Número de periodos de transición. Cada periodo equivale a 5 años en la vida real. | X |  |  | Definido por criterio numérico |
-| JJ | Número de años que vive un hogar. Los hogares empiezan su vida económica a los 20 años ( $j=1$ ). Viven hasta los 100 años ( $J J=16$ ). | X |  |  | Definido por Fehr y Kindermann (2018). |
-| JR | Edad obligatoria de retiro. Los hogares se retiran a los 65 años ( $j_r=10$ ) | X |  |  | Definido por Fehr y Kindermann (2018). |
+| JJ | Número de años que vive un hogar. Los hogares empiezan su vida económica a los 20 años ( $j=1$ ). Viven hasta los 100 años ( $J J=16$ ). | X |  |  | |
+| JR | Edad obligatoria de retiro. Los hogares se retiran a los 65 años ( $j_r=10$ ) | X |  |  |  |
 | $gamma$ | Coeficiente de aversión relativa al riesgo (recíproco de la elasticidad de sustitución intertemporal) |  | X |  | El parámetro fue calibrado hasta obtener las salidas más cercanas a los valores observados de las razones del Consumo e Inversión con respecto al PIB. |
-| $\nu$ | Parámetro de la intensidad de preferencia de ocio. | X |  |  | Se consultó PWT 10.01, Penn World Table |
-| $\beta$ | Factor de descuento de tiempo. |  | X |  | Calibrado por Fehr y Kindermann (2018). |
+| $nu$ | Parámetro de la intensidad de preferencia de ocio. | X |  |  | Se consultó PWT 10.01, Penn World Table |
+| $beta$ | Factor de descuento de tiempo. |  | X |  | Calibrado por Fehr y Kindermann (2018). |
 | $sigma_theta^2$ | Varianza del efecto fíjo $theta$ sobre la productividad. |  | X |  | Calibrado por Fehr y Kindermann (2018). |
 | $sigma_epsilon^2$ | Varianza del componente autoregresivo $eta$. | X | |  | Calibrado por Fehr y Kindermann (2018). |
 | $alpha$ | Elasticidad del capital en la función de producción. Corresponde a la razón capital en el producto. | X | | | Se consultó PWT 10.01, Penn World Table |
 | $delta$ | Tasa de depreciación de capital. | X | | | Se consultó PWT 10.01, Penn World Table |
 | $Omega$ | Nivel de tecnología. |  | | | Calibrado numéricamente para ajustar la tasa de salarios a $w_t=1$. |
 | $n_p$ | Tasa de crecimiento poblacional. | X | | | Se consultó OECD, Fertility rates |
-| gy | Gasto público como porcentage del PIB. | X | | | Se consultó PWT 10.01, Penn World Table |
+| gy | Gasto público como porcentage del PIB. | X | | | Se consultó Banco Mundial, General government final consumption expenditure (% of GDP) |
 | by | Endeudamiento público como porcentage del PIB. | X | | | Banco de datos de CEPAL |
 | $kappa$ | Tasa de reemplazo de sistema de pensiones. | X | | | Se consultó OECD-Founded Pension Indicators-Contributions |
-| $psi_j$ | Tasas de supervivencia por cohorte de edad. | X | | | Definido por Fehr y Kindermann (2018). |
-| $e_j$ | Perfil de eficiencia de ingresos laborales por cohorte de edad. | X | | | Definido por (2018). |
-| $tau_t^c$ | Tasa de impuesto al consumo. | X |  | | Se consultó OECD Tax Database |
-| $tau_t^w$ | Tasa de impuesto al ingreso laboral. | X | X | | Se consultó OECD Tax Database |
+| $psi_j$ | Tasas de supervivencia por cohorte de edad. | X | | | Calculado con las pirámides poblacionales del Censo de Población de 2020 |
+| $e_j$ | Perfil de eficiencia de ingresos laborales por cohorte de edad. | X | | | ENOE Q2 2021 |
+| $tau_t^c$ | Tasa de impuesto al consumo. | X |  | | Tasa efectiva calculada por CIEP |
+| $tau_t^w$ | Tasa de impuesto al ingreso laboral. | X |  | | Tasa efectiva calculada por CIEP |
 | $tau_t^r$ | Tasa de impuesto al ingreso de capital. |  | X | | Se consultó OECD Tax Database |
 | $tau_t^p$ | Tasa de contribución sobre nómina al sistema de pensiones. |  | X | | Se consultó OECD-Founded Pension Indicators-Contributions |
-| $tau_(j, t)^(i m p l)$ | Tasa de impuestos implícita de la contribución sobre nómina al sistema de pensiones. |  | X | | Se consultó OECD-Founded Pension Indicators-Contributions |
+| $tau_(j, t)^(i m p l)$ | Tasa de impuestos implícita de la contribución sobre nómina al sistema de pensiones. |  | X | |  |
+| $lambda$ | Factor de progresividad del sistema de pensiones. | X |  | |  |
 | PEN/GDP | Pago a pensiones como porcentaje del PIB. |  | X | | Se consultó OECD-Pensions at Glance-Public expenditure on pensions |
 | C/GDP. | Consumo privado como porcentaje del PIB. |  | X | | Se consultó PWT 10.01, Penn World Table |
 | I/GDP | Inversión como porcentaje del PIB. |  | X | | Se consultó PWT 10.01, Penn World Table |
@@ -103,7 +104,7 @@ La siguiente tabla resume los valores de los parámetros del modelo:
 
   [Parámetro de la intensidad de preferencia de ocio.],
   [$nu$],
-  [0.389],
+  [0.45],
 
   [Factor de descuento de tiempo.], 
   [$beta$],
@@ -115,7 +116,7 @@ La siguiente tabla resume los valores de los parámetros del modelo:
   
   [Elasticidad del capital en la función de producción. Corresponde a la razón capital-producto.],
   [$alpha$],
-  [0.622],
+  [0.619],
 
   [Tasa de depreciación de capital.],
   [$delta$],
@@ -123,7 +124,7 @@ La siguiente tabla resume los valores de los parámetros del modelo:
 
   [Nivel de tecnologı́a.],
   [$Omega$], 
-  [1.89], 
+  [1.65], 
 
   cmidrule(start: 0, end: -1), // added by this package
 
@@ -141,19 +142,19 @@ La siguiente tabla resume los valores de los parámetros del modelo:
   table.cell(colspan: 3)[*Gobierno*],
   [Gasto público como porcentage del PIB.], 
   [gy], 
-  [18.2 %],
+  [11.02 %],
 
   [Endeudamiento público como porcentaje del PIB.], 
   [by], 
-  [44.2 %],
+  [52.3 %],
 
   [Tasa de impuesto al consumo.], 
   [$tau_t^c$], 
-  [16.0 %],
+  [5.73 %],
 
-  [Tasa de impuesto al ingreso de capital.], 
-  [$tau_t^r$], 
-  [0.0 %],
+  [Tasa de impuesto al ingreso.], 
+  [$tau_t^w$], 
+  [12.73 %],
 
   cmidrule(start: 0, end: -1), // added by this package
 
@@ -161,7 +162,11 @@ La siguiente tabla resume los valores de los parámetros del modelo:
 
   [Tasa de reemplazo de sistema de pensiones.],
   [$kappa$],
-  [0.643],
+  [64.3%],
+
+  [Factor de Progresividad del sistema de pensiones.],
+  [$lambda$],
+  [0.0],
 
   cmidrule(start: 0, end: -1), // added by this package
 
@@ -169,7 +174,7 @@ La siguiente tabla resume los valores de los parámetros del modelo:
 
   [Tasa de crecimiento poblacional],
   [$n_p$],
-  [2.1 %],
+  [1.8 %],
 
   bottomrule() // added by this package
 )
@@ -189,71 +194,58 @@ La siguiente tabla resume los valores de los parámetros del modelo:
   table.cell(colspan: 3)[*Mercado de Bienes ( % PIB)*],
   
   [- Consumo Privado],
-  [],
-  [64.23],
-
+  [69.04],
+  [70.2],
   [- Gasto Público],
-  [],
-  [18.2],
+  [11.02],
+  [11.02],
 
   [- Inversión], 
-  [],
-  [21.08],
+  [19.94],
+  [18.39],
 
   cmidrule(start: 0, end: -1), // added by this package
 
-  table.cell(colspan: 3)[*Tasas de impuestos (en %)*],
+  table.cell(colspan: 3)[*Tasas de impuestos (en %)*#footnote[Tasas Efectivas vs Tasa Nominal]],
   
   [- Consumo],
-  [],
-  [64.23],
+  [5.73],
+  [16.0],
 
   [- Ingreso],
-  [],
-  [18.2],
-
-  [- Ingreso medio],
-  [],
-  [18.2],
-
-  [- Ingreso máximo],
-  [],
-  [18.2],
-
-  [- Ingreso mínimo],
-  [],
-  [18.2],
+  [12.73],
+  [1.92 - 35.0],
 
   [- Capital],
-  [],
-  [18.2],
+  [14.58],
+  [12.13#footnote[Tasa Efectiva]],
 
   cmidrule(start: 0, end: -1), // added by this package
 
   table.cell(colspan: 3)[*Ingresos por impuestos ( % PIB)*],
   
   [- Consumo],
-  [],
-  [64.23],
+  [3.96],
+  [4.07],
 
   [- Ingreso],
-  [],
-  [18.2],
+  [4.85],
+  [3.91#footnote[Impuestos al ingreso aplicados a remuneraciones a asalariados e ingresos mixtos]],
 
   [- Capital], 
-  [],
-  [21.08],
+  [8.14],
+  [5.33],
 
   cmidrule(start: 0, end: -1), // added by this package
 
   table.cell(colspan: 3)[*Sistema de pensiones*],
   
   [- Tasa de reemplazo],
-  [],
-  [64.23],
+  [64.3],
+  [64.3],
 
   [- Pagos a pensiones ( % PIB)],
-  [],
+  [2.44],
   [18.2],
 
   cmidrule(start: 0, end: -1), // added by this package
@@ -261,8 +253,8 @@ La siguiente tabla resume los valores de los parámetros del modelo:
   table.cell(colspan: 3)[*Demografía*],
   
   [- Tasa de crecimiento poblacional],
-  [],
-  [64.23],
+  [1.82],
+  [1.82],
 
 
   bottomrule() // added by this package

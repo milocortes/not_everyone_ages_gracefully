@@ -78,7 +78,7 @@ table(
   align: (left, center, center),
   toprule(), // added by this package
   table.header(
-    [],
+    [*Año*],
     [*2022*],
     [*2030*],
     [*2040*],
@@ -127,7 +127,7 @@ Referencing @table-flat-pension in-text using its label.
 #page(flipped: true)[
 #figure(
 table(
-  columns: (115pt, 90pt, 100pt, 100pt, 100pt) ,
+  columns: (125pt, 90pt, 100pt, 100pt, 100pt) ,
   align: (center, center, center),
   toprule(), // added by this package
   table.header(
@@ -177,4 +177,7 @@ table(
   , caption : [Welfare effects of flat pensions (base model version).]
 ) 
 
+ddedee
 ]
+
+
