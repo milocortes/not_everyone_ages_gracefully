@@ -42,7 +42,7 @@ Con respecto al sistema de pensiones, tenemos que definir la tasa de reemplazo $
 
 El valor del factor de descuento intertemporal $beta$ fue el mismo que el usado por los autores.
 
-Para el equilibrio inicial, consideramos que el sistema de pensiones es regresivo, es decir el factor de progresividad $lambda=1$.
+Para el equilibrio inicial, consideramos que el sistema de pensiones es regresivo, es decir el factor de progresividad $lambda=0$.
 
 Las tasas de probabilidad de muerte fueron estimadas con las pirámides poblacionales por cohorte de edad del Censo de Población y Vivienda de 2020.  
 

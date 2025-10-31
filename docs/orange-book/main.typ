@@ -1,5 +1,6 @@
 #import "@preview/orange-book:0.6.1": book, part, chapter, my-bibliography, appendices, make-index, index, theorem, definition, notation,remark,corollary,proposition,example,exercise, problem, vocabulary, scr, update-heading-image
-
+#import "@preview/algorithmic:1.0.6"
+#import algorithmic: style-algorithm, algorithm-figure
 //#set text(font: "Linux Libertine")
 //#set text(font: "TeX Gyre Pagella")
 //#set text(font: "Lato")
@@ -297,13 +298,43 @@ Referencing @figure in-text using its label and referencing @figure1 in-text usi
 
 #show: appendices.with("Appendices", hide-parent: false)
 
-#chapter("Appendix Chapter Title", image: image("./orange2.jpg"))
+#chapter("Aspectos Computacionales", image: image("./orange2.jpg"))
 
-== Appendix Section Title
+== Solución al problema de los hogares 
+Para encontrar la solución al problema de los hogares se necesita discretizar el espacio de estados $z$. Se tiene que calcular tres conjuntos de nodos #mitex(`\hat{\mathcal{A}}=\left\{a^1, \ldots, a^{n_A}\right\}, \hat{\mathcal{P}}=\left\{e p^1, \ldots, e p^{n_P}\right\}, \hat{\mathcal{E}}=\left\{\eta^1, \ldots, \eta^{n_E}\right\}`)
 
-#lorem(50)
-#chapter("Appendix Chapter Title", image: image("./orange2.jpg"))
+Se usa el método de @rouwenhorst1995asset para obtener una aproximación de la distribución de $eta$, el cual sigue un proceso AR(1), mediante una Cadena de Markov discreta. 
 
-== Appendix Section Title
+Para cada uno de los valores discretizados de $z_j$ se calcula la decisión óptima de los hogares a partir del problema de optimización (función de política) mediante el algoritmo de iteración de la función de política el cual utiliza una interpolación spline multidimensional @habermann2007multidimensional del nivel de ahorro y earning points de los hogares así como el método de Newton para encontrar las raíces de la condición de primer orden.
 
-#lorem(50)
+
+
+
+== Algoritmo para el equilibrio macroeconómico del cálculo del equilibrio inicial y transición
+
+Las series de tiempo de precios de los factores así como los valores de las variables de política de la transición del estado de equilibrio inicial al siguiente se obtienen mediante el algoritmo iterativo Gauss-Seidel @alma99576423502432.
+
+Se fijan las condiciones iniciales de las variables de stock $K_1$, $B Q_1$, $B_1$, capital, herencias y deuda respectivamente. Se asignan iguales a los valores del equilibrio inicial $K_0$, $B Q_0$ $B_0$. 
+
+El valor de dichos stocks es calibrado a lo largo de la transición mediante un parámetro de velocidad de ajuste *damp factor*. 
+
+El pseudocódigo del programa de la transición es el siguiente:
+
+#show: style-algorithm
+#algorithm-figure(
+  "Equilibrio Inicial y Transición",
+  vstroke: .5pt + luma(200),
+  {
+    import algorithmic: *
+    Procedure(
+      "eq-inicial-trans",
+      (""),
+      {
+      For($i t e r in 1:max$, {
+        Assign[$x_i$][$i$]
+      })
+        Return[*null*]
+      },
+    )
+  }
+)
