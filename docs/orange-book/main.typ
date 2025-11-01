@@ -9,7 +9,7 @@
 //#show raw: set text(font: "Fira Code")
 
 #show: book.with(
-  title: "Not Everyone Ages Gracefully: Fiscal Adjustments to Exogenous Shocks in Three Latin American Countries ",
+  title: "Not Everyone Ages Gracefully: Fiscal Adjustments to Exogenous Shocks in Three Latin American Countries",
   subtitle: "",
   date: "Anno scolastico 2023-2024",
   author: "",
