@@ -97,3 +97,33 @@ for i, file in enumerate(baseline_lambda[:-1]):
     macro_data = pd.concat([macro_data, df_subset], axis = 1)
 
 macro_data = macro_data.round(2)
+
+
+#### Gráfico de dispersion eficiencia vs razon pensiones/PIB, color lambda tamaño formal share
+experimental_design = pd.read_csv("datos/experimental_design.csv")
+razon_formal = glob.glob("output/share_formal/experimentos/*.csv")
+razon_formal.sort()
+
+
+datos_experimentos = []
+
+for archivo in razon_formal:
+    df = pd.read_csv(archivo)
+
+    df["pension_pib"] = df["PP"]/df["YY"]*100
+
+    id_exp = int(archivo.split("/")[-1].split(".")[0].split("_")[-1])
+
+    exp_config = experimental_design.iloc[id_exp].to_list()
+    pension_hicks = df[["pension_pib", "hicksian"]].iloc[40].to_list()
+
+    datos_experimentos.append(
+        exp_config + pension_hicks
+    )
+
+
+experimentos_resultados = pd.DataFrame( datos_experimentos, columns = ["formal_share", "lambda", "pension_pib", "hicksian"])
+
+
+
+
