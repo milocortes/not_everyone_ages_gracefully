@@ -1,5 +1,7 @@
 import pandas as pd 
 from pathlib import Path
+import glob 
+
 
 FP = Path("./ouput/baseline_lambda")
 
@@ -15,8 +17,10 @@ def build_macroeconomics_effects(
 
 
 
-df = pd.read_csv("output/results_all_razon_formal_0_95_lambda_1_0.csv")
-df = pd.read_csv("/home/milo/Downloads/output/results_all_lsra_baseline_lambda_1.0.csv")
+#df = pd.read_csv("output/results_all_razon_formal_0_95_lambda_1_0.csv")
+#df = pd.read_csv("/home/milo/Downloads/output/results_all_lsra_baseline_lambda_1.0.csv")
+df = pd.read_csv("output/results_all_no_lsra_baseline_lambda_formal_share_0_95_1.0_T_100.csv")
+
 df["pension_pib"] = df["PP"]/df["YY"]*100
 
 mapeo_anios_indices = {i : j for i,j in enumerate(range(2021,2101))}
@@ -73,3 +77,23 @@ for anio in anios_nacimiento:
 hicksian_variation = pd.DataFrame(datos, columns = ["anio", "formal", "informal", "lsra"])
 hicksian_variation
 
+
+#### Efectos macro y Eficiencia. Modelo Baseline. Lambda crece progresivamente 0.1:1.0:0.1
+baseline_lambda = glob.glob("output/baseline_lambda/*.csv")
+baseline_lambda.sort()
+
+macro_data = pd.DataFrame()
+
+
+for i, file in enumerate(baseline_lambda[:-1]):
+    df = pd.read_csv(file)
+
+    df["pension_pib"] = df["PP"]/df["YY"]*100
+    df_subset = (df[["YY","LL", "KK", "w", "r", "taur", "taup"]].iloc[[0, 40]].pct_change()*100).T.drop(columns=0).rename(columns = {40: i})
+    df_pension = df[["pension_pib", "hicksian"]].iloc[[40]].T.rename(columns = {40: i})
+
+    df_subset = pd.concat([df_subset, df_pension])
+
+    macro_data = pd.concat([macro_data, df_subset], axis = 1)
+
+macro_data = macro_data.round(2)

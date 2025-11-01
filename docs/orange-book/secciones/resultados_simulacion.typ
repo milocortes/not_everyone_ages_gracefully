@@ -182,3 +182,114 @@ ddedee
 ]
 
 
+
+#page(flipped: true)[
+#figure(
+table(
+  columns: (170pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt) ,
+  align: (left, center, center),
+  toprule(), // added by this package
+  table.header(
+    [*$lambda$*],
+    [*0.1*],
+    [*0.2*],
+    [*0.3*],
+    [*0.4*],
+    [*0.5*],
+    [*0.6*],
+    [*0.7*],
+    [*0.8*],
+    [*0.9*]
+  ),
+
+  midrule(), // added by this package
+  table.cell(colspan: 10)[*Agregados Macroeconómicos*],
+  [PIB],[-0.56], [-1.12], [-1.69], [-2.26], [-2.82], [-3.39], [-3.96], [-4.51], [-5.03],      
+  [Trabajo],[-0.11], [-0.24], [-0.36], [-0.48], [-0.6], [-0.73], [-0.85], [-0.98], [-1.1],
+  [Capital],[-0.82], [-1.66], [-2.5], [-3.33], [-4.16], [-4.99], [-5.82], [-6.63], [-7.37],
+  [],[],[],[],[],[],[],[],[],[],
+  
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Precios*],
+  [Salario],[-0.44], [-0.88], [-1.33], [-1.78], [-2.23], [-2.68], [-3.13], [-3.57], [-3.97],
+  [Tasa de interés], [0.34], [0.69], [1.05], [1.41], [1.77], [2.14], [2.5], [2.86], [3.2],
+  [Impuesto al capital],[1.29], [2.61], [3.95], [5.3], [6.67], [8.06], [9.44], [10.83], [12.12],
+  [],[],[],[],[],[],[],[],[],[],
+
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Sistema de Pensiones*],
+  [Gasto en Pensiones#footnote[en % de PIB]],[2.48], [2.52], [2.56], [2.6], [2.64], [2.68], [2.72], [2.76], [2.8],
+  [Tasa de Contribución],[1.57], [3.16], [4.76], [6.37], [8.0], [9.64], [11.3], [12.97], [14.66],
+  [],[],[],[],[],[],[],[],[],[],
+
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Eficiencia Agregada*],
+  [Con LSRA],[-0.01], [-0.02], [-0.03], [-0.041], [-0.053], [-0.065], [-0.079], [-0.094], [-0.111],
+  [],[],[],[],[],[],[],[],[],[],
+
+  bottomrule() // added by this package
+  )
+  , caption : [Aggregate efficiency effects of alternative progressivity levels.]
+) 
+
+]
+
+
+
+#page(flipped: true)[
+#figure(
+table(
+  columns: (170pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt, 50pt) ,
+  align: (left, center, center),
+  toprule(), // added by this package
+  table.header(
+    [*Año*],
+    [*2022*],
+    [*2030*],
+    [*2040*],
+    [*2050*],
+    [*2060*],
+    [*2070*],
+    [*2080*],
+    [*2090*],
+    [$infinity$],
+  ),
+
+  midrule(), // added by this package
+  table.cell(colspan: 10)[*Agregados Macroeconómicos*],
+  [PIB],[-0.25], [0.84], [0.38], [-0.0], [-0.22], [-0.34], [-0.41], [-0.44], [-0.47],        
+  [Trabajo],[-0.65], [4.02], [3.69], [3.71], [3.71], [3.72], [3.72], [3.72], [3.72],    
+  [Capital],[-0.0], [-1.06], [-1.61], [-2.22], [-2.56], [-2.75], [-2.86], [-2.92], [-2.96],
+  [],[],[],[],[],[],[],[],[],[],
+  
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Precios*],
+  [Salario],[0.4], [-3.06], [-3.2], [-3.58], [-3.79], [-3.91], [-3.98], [-4.02], [-4.04],
+  [Tasa de interés],[-0.31], [2.44], [2.56], [2.87], [3.05], [3.15], [3.2], [3.23], [3.25],
+  [Impuesto al capital],[0.11], [-0.59], [0.3], [1.23], [1.75], [2.05], [2.22], [2.31], [2.37],
+  [],[],[],[],[],[],[],[],[],[],
+
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Sistema de Pensiones*],
+  [Gasto en Pensiones#footnote[en % de PIB]],[2.42], [2.71], [2.97], [2.97], [2.97], [2.97], [2.97], [2.97], [2.97],
+  [Tasa de Contribución],[-4.16], [-2.05], [7.6], [7.6], [7.6], [7.6], [7.6], [7.6], [7.6],
+  [],[],[],[],[],[],[],[],[],[],
+
+  cmidrule(start: 0, end: -1), // added by this package
+
+  table.cell(colspan: 10)[*Eficiencia Agregada*],
+  [Con LSRA],[], [], [], [], [], [], [], [], [1.05],
+  [],[],[],[],[],[],[],[],[],[],
+
+  bottomrule() // added by this package
+  )
+  , caption : [Welfare effects of flat pensions (base model version) and Complete Formal Labor Market.]
+)
+
+]
+
