@@ -712,6 +712,30 @@ El valor de dichos stocks es calibrado a lo largo de la transición mediante un 
 
 ]
 
+
+#slide[
+= El Modelo está desarrollado en Julia y Fortran
+
+  #toolbox.side-by-side(gutter: 3mm, columns: (2fr, 2fr), 
+
+  [
+      #v(6em)
+      #figure(
+        image("images/julia.png", width: 70%),
+        numbering: none
+      )
+  ], 
+  [   
+      #v(6em)
+      #figure(
+        image("images/fortran.png", width: 50%),
+        numbering: none
+      )
+
+  ]
+
+  )
+]
 #new-section-slide("Equilbrio Inicial")
 
 #slide[
@@ -1106,6 +1130,12 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
 ]
 
 #slide[
+  = Conclusiones
+
+
+]
+
+#slide[
   == Siguientes pasos
 
 #list(
@@ -1115,9 +1145,37 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
   [*Salud*: Incorporar categorización de status de salud (buena/mala salud). Más del 50% de la población de 50+ tiene diabetes o hipertensión o ambas. 60% de los años perdidos por discapacidad (DALYs) por ENT (2021) (IHME).],
   [Modelar el impacto de cambios en reglas fiscales. ]
 )
-
 ]
 
+#slide[
+  = El Modelo es Lento : The method of endogenous gridpoints for solving dynamic stochastic optimization problems @carroll2006method
+
+    #figure(
+      image("images/endogenous_grid.png", width: 64%),
+    ) 
+]
+
+#slide[
+  = El Modelo es Lento : Deep Learning for Solving Economic Models @fernandez2025deep
+    #figure(
+      image("images/deeplearning.png", width: 75%),
+    ) 
+]
+ 
+
+#slide[
+  = Programming FPGAs for Economics : An Introduction to Electrical Engineering Economics @cheela2025programming
+    #figure(
+      image("images/fpga.png", width: 80%),
+    ) 
+]
+
+#slide[
+  = Programming FPGAs for Economics : An Introduction to Electrical Engineering Economics @cheela2025programming
+    #figure(
+      image("images/fpga_placa.jpg", width: 75%),
+    ) 
+]
 #slide[
   #bibliography("references.bib",  style: "apa")
 ]
