@@ -291,5 +291,11 @@ table(
   , caption : [Welfare effects of flat pensions (base model version) and Complete Formal Labor Market.]
 )
 
+
+    #figure(
+      image("images/formal_share.svg", width: 100%),
+      caption: [Eficiencia Agregada a distintos niveles de la razón de empleo formal y factor de progresividad]
+    ) 
+
 ]
 
