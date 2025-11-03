@@ -84,6 +84,14 @@
 ]
 
 
+#slide[
+  = Objetivo del Estudio y Preguntas de Investigación
+
+- Entender mejor los desbalances fiscales que se generan por cambios demográficos, en la estructura laboral, sistema de pensiones, economía de cuidados, etc. 
+- ¿Qué reforma favorecen la sostenibilidad fiscal?
+- ¿Cuáles serı́an los efectos en mercados laborales de hacer reformas?
+- #text(fill: ukj-blue)[*¿Cuál es el papel redistributivo del sistema de pensiones? ¿Qué efectos produce mejorar la progresividad de este sistema?*]
+]
 #new-section-slide("Métodos")
 #slide[
   = Métodos
@@ -272,7 +280,7 @@ donde $r_t^n$ es la tasa de interés neta en $t$ y $a_{j,s,t}$ son los activos d
 #slide[
 = Riesgo en la productividad laboral
 #mitext(`
-Los individuos difieren respecto a su productividad laboral $h_{j, t}$, la cual depende de un perfil (determinístico) de ingresos por edad $e_{j,s}$ que depende del tipo de trabajo, un efecto de productividad fijo $\theta_s$ que es definido al comienzo del ciclo de vida y que, de igual forma, depende del tipo de trabajo (formal e informal) al que son asignados\footnote{Representa un shock permanente}. 
+Los individuos difieren respecto a su productividad laboral $h_{j, t}$, la cual es función de un perfil (determinístico) de ingresos por edad $e_{j,s}$ que depende del tipo de trabajo (formal e informal) al que son asignados\footnote{Representa un shock permanente}. 
 
 Además, se agrega un shock idiosincrático mediante un componente autoregresivo $\eta_{j, t}$ que evoluciona en el tiempo y que tiene una estructura autoregresiva de orden 1, de manera que
 
@@ -284,7 +292,7 @@ $$
 Dada esta estructura, la productividad laboral del hogar es
 
 $$
-h_{j,s}= \begin{cases}e_{j,s} \exp \left[\eta_j\right] & \text { si } j<j_r \\ 0 & \text { si } j \geq j_r\end{cases}
+h_{j,s}= \begin{cases}e_{j,s} \exp \left[  \eta_j\right] & \text { si } j<j_r \\ 0 & \text { si } j \geq j_r\end{cases}
 $$
 `)
 ]
@@ -526,7 +534,7 @@ El beneficio de la pensión se calcula por la suma de earnings points acumulados
 p_j = \kappa \times \text{ep}_{j_r} \times \text{APA}
 \end{equation}
 
-Con el tiempo, APA crece con los ingresos laborales brutos.
+%Con el tiempo, APA crece con los ingresos laborales brutos.
 `)
 ]
 
@@ -566,11 +574,10 @@ La siguiente tabla presenta los parámetros del modelo. Se clasifican de acuerdo
 | TT | Número de periodos de transición. Cada periodo equivale a 5 años en la vida real. | X |  |  | Definido por criterio numérico |
 | JJ | Número de años que vive un hogar. Los hogares empiezan su vida económica a los 20 años ( $j=1$ ). Viven hasta los 100 años ( $J J=16$ ). | X |  |  | |
 | JR | Edad obligatoria de retiro. Los hogares se retiran a los 65 años ( $j_r=10$ ) | X |  |  |  |
-| $gamma$ | Coeficiente de aversión relativa al riesgo (recíproco de la elasticidad de sustitución intertemporal) |  | X |  | El parámetro fue calibrado hasta obtener las salidas más cercanas a los valores observados de las razones del Consumo e Inversión con respecto al PIB. |
 | $nu$ | Parámetro de la intensidad de preferencia de ocio. | X |  |  | Se consultó PWT 10.01, Penn World Table |
 | $beta$ | Factor de descuento de tiempo. |  | X |  | Calibrado por Fehr y Kindermann (2018). |
-| $sigma_theta^2$ | Varianza del efecto fíjo $theta$ sobre la productividad. |  | X |  | Calibrado por Fehr y Kindermann (2018). |
 | $sigma_epsilon^2$ | Varianza del componente autoregresivo $eta$. | X | |  | Calibrado por Fehr y Kindermann (2018). |
+| $gamma$ | Coeficiente de aversión relativa al riesgo (recíproco de la elasticidad de sustitución intertemporal) |  | X |  | El parámetro fue calibrado hasta obtener las salidas más cercanas a los valores observados de las razones del Consumo e Inversión con respecto al PIB. |
 | $alpha$ | Elasticidad del capital en la función de producción. Corresponde a la razón capital en el producto. | X | | | Se consultó PWT 10.01, Penn World Table |
 | $delta$ | Tasa de depreciación de capital. | X | | | Se consultó PWT 10.01, Penn World Table |
 | $Omega$ | Nivel de tecnología. |  | | | Calibrado numéricamente para ajustar la tasa de salarios a $w_t=1$. |
@@ -894,6 +901,7 @@ donde $phi.alt$ indica el porcentaje de cambio tanto en consumo como en ocio que
   - El segundo : el sistema de pensiones independiente del historial de ingresos $lambda = 1$, también funciona como un seguro contra riesgos del mercado laboral, lo que tiende a mejorar el bienestar. 
 ]
 
+/*
 #slide[
 
 = Efectos del incremento de la progresividad
@@ -906,6 +914,7 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
 - ¿Se benefician-afectan las nuevas generaciones?
 - ¿Qué pasa con la medida global del LSRA? Es decir, los efectos en bienestar después de pagos de compensación.
 ]
+*/
 
 #slide[
 = Efectos macroeconómicos
@@ -1066,7 +1075,7 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
 ]
 
 #slide[
-= Efectos macroeconómicos y eficiencia para distintas $lambda$
+= Efectos macroeconómicos y eficiencia para $lambda = 1$ y Tasa de Formalidad del 95% 
 #text(size: 14pt, font: "Lato")[
 #table(
   columns: (200pt, 60pt, 60pt, 60pt, 60pt, 60pt, 60pt, 60pt, 60pt, 60pt) ,
@@ -1120,7 +1129,7 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
 
 
 #slide[
-  == Podemos pensar los diagramas relatedness-complexity en término de 4 cuadrantes
+  == Mayor Tasa de Formalidad y Mayor Progresividad no se traducen en incrementos de la Eficiencia Agregada
 
     #figure(
       image("images/formal_share.svg", width: 100%),
@@ -1132,6 +1141,9 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
 #slide[
   = Conclusiones
 
+  - El incremento de la progresividad del sistema de pensiones tiene efectos positivos en la eficiencia agregada sólo si está acompañado del incremento de la tasa de formalidad. 
+  - Esto se debe a que se expande el efecto positivo de una pensión progresiva de funcionar como un mecanismo de cobertura frente a shocks alteatorios *vis a vis* en efecto negativo que distorsiona el mercado laboral.
+  - La combinación entre entre sostenibilidad fiscal e incremento de eficiencia es dominado por el nivel de la tasa de formalidad más que por el nivel de progresividad del sistema. 
 
 ]
 
@@ -1175,6 +1187,13 @@ Usamos la variación Hicksiana como medida de los efectos en bienestar para dife
     #figure(
       image("images/fpga_placa.jpg", width: 75%),
     ) 
+]
+
+#slide[
+  #v(8em)
+  #text(size: 100pt, font: "Lato")[
+    *GRACIAS!!!*
+  ]
 ]
 #slide[
   #bibliography("references.bib",  style: "apa")
