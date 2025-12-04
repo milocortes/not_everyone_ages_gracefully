@@ -60,13 +60,13 @@
 
 
 
-#include "secciones/modelo.typ"
+#include "secciones/modelo_trad.typ"
 
-#include "secciones/datos.typ"
+#include "secciones/datos_trad.typ"
 
-#include "secciones/resultados_simulacion.typ"
+#include "secciones/resultados_simulacion_trad.typ"
 
-#include "secciones/conclusiones.typ"
+#include "secciones/conclusiones_trad.typ"
 
 #show: appendix
 
